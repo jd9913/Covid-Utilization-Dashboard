@@ -8,22 +8,25 @@
     <Content Include=".gitattributes" />
     <Content Include=".gitignore" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\dashboardStyles.css" />
+    <Content Include="Content\summaryStyles.css" />
     <Content Include="copyDashboard.html" />
     <Content Include="hospitalCapacityDashboard.html" />
+    <Content Include="Scripts\dashboardScriptWebEOC.js" />
+    <Content Include="Scripts\hospitalCapacityDashboard.js" />
     <Content Include="Scripts\script.js" />
     <Content Include="Content\scrolling-nav.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\styles.css" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\scrolling-nav.js" />
-    <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\summaryScript.js" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\BedCap_326-824_byColumn.json" />

@@ -73,11 +73,11 @@ var support = {};
 
 var isFunction = function isFunction( obj ) {
 
-      // Support: Chrome <=57, Firefox <=52
-      // In some browsers, typeof returns "function" for HTML <object> elements
-      // (i.e., `typeof document.createElement( "object" ) === "function"`).
-      // We don't want to classify *any* DOM node as a function.
-      return typeof obj === "function" && typeof obj.nodeType !== "number";
+	  // Support: Chrome <=57, Firefox <=52
+	  // In some browsers, typeof returns "function" for HTML <object> elements
+	  // (i.e., `typeof document.createElement( "object" ) === "function"`).
+	  // We don't want to classify *any* DOM node as a function.
+	  return typeof obj === "function" && typeof obj.nodeType !== "number";
   };
 
 
@@ -3146,18 +3146,18 @@ jQuery.each( {
 		return siblings( elem.firstChild );
 	},
 	contents: function( elem ) {
-        if ( nodeName( elem, "iframe" ) ) {
-            return elem.contentDocument;
-        }
+		if ( nodeName( elem, "iframe" ) ) {
+			return elem.contentDocument;
+		}
 
-        // Support: IE 9 - 11 only, iOS 7 only, Android Browser <=4.3 only
-        // Treat the template element as a regular one in browsers that
-        // don't support it.
-        if ( nodeName( elem, "template" ) ) {
-            elem = elem.content || elem;
-        }
+		// Support: IE 9 - 11 only, iOS 7 only, Android Browser <=4.3 only
+		// Treat the template element as a regular one in browsers that
+		// don't support it.
+		if ( nodeName( elem, "template" ) ) {
+			elem = elem.content || elem;
+		}
 
-        return jQuery.merge( [], elem.childNodes );
+		return jQuery.merge( [], elem.childNodes );
 	}
 }, function( name, fn ) {
 	jQuery.fn[ name ] = function( until, selector ) {
