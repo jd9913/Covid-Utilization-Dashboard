@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+
+    <title>Hospital Capacity Dashboard</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <link rel="stylesheet" href="./content/styles.css" />
+
+
+
+</head>
+<body>
+    <header class="jumbotron">
+        <h1 class="display-4 text-center font-weight-bold">Hospital Capacity Dashboard</h1>
+        <p id='currentDay' class="lead"></p>
+            </header>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-sm-4 text-center">
+                <div class="panel panel-default">
+                    <h3 class="panel-title">Emergency Department</h3></div>
+                <div  class="panel-content text-center dsNumber">
+                    <p id="covidEDNumber"></p>
+                </div>
+                <div class="panel-footer"><h4>COVID Positive Patients Seen in ED</h4></div>
+            </div>
+
+            <div class="col-sm-4 text-center">
+                <div class="panel panel-default">
+                    <h3 class="panel-title">Admissions</h3></div>
+                <div  class="panel-content text-center dsNumber">
+                    <p id="covidAdmitNumber" ></p>
+                </div>
+                <div class="panel-footer"><h4>COVID Positive Admissions</h4></div>
+            </div>
+
+            <div class="col-sm-4 text-center">
+                <div class="panel panel-default">
+                    <h3 class="panel-title">Inpatients</h3></div>
+                <div class="panel-content text-center dsNumber">
+                    <p id="covidInptNumber"></p>
+                </div>
+                <div class="panel-footer"><h4>COVID Positive Inpatients</h4></div>
+            </div>
+
+            <div class="col-sm-4 text-center">
+                <div class="panel panel-default">
+                    <h3 class="panel-title">Medical Surgical Beds</h3>
+                </div>
+                <div class="panel-content text-center">
+                    <canvas id="medSurgBeds" class="chart"></canvas>
+                </div>
+                <div class="panel-footer"><h4>Available, covid positive and other</h4></div>
+            </div>
+
+            <div class="col-sm-4 text-center">
+                <div class="panel panel-default">
+                    <h3 class="panel-title">ICU Beds</h3>
+                </div>
+                <div class="panel-content text-center">
+                    <canvas id="IcuBeds" class="chart"></canvas>
+                </div>
+                <div class="panel-footer">
+                    <h4>Available, covid positive and other</h4>
+                </div>
+            </div>
+
+            <div class="col-sm-4 text-center">
+                <div class="panel panel-default">
+                    <h3 class="panel-title"> Ventilations</h3>
+                </div>
+                <div class="panel-content text-center">
+                    <canvas id="vents" class="chart"></canvas>
+                </div>
+                <div class="panel-footer"><h4>Available, covid positive and other</h4></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+
+                <div class="panel panel-default">
+                    <h3 class="panel-title">COVID + Line Chart</h3>
+                </div>
+                <div class="panel-content text-center">
+                    <canvas id="covidLine" class="chart"></canvas>
+                </div>
+                <div class="panel-footer"><h4>COVID Positive Patients Line Chart</h4></div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+        //global variables for linking to webEOC data
+        const EDDataAllNumber = '<EDPosPts/>';
+        const ADDataAllNumber = '<COVIDpositiveAdmits/>';
+        const InptDataAllNumber = '<COVIDpositiveInpatients/>'
+
+        
+
+
+        const dataEDNumber = [];//number of daily + patients seen in ED
+        const dataAdNumber = [];// number of daily + patients admitted
+        const dataInptNumber = []; //number of daily + patients as inpatients
+
+        const dataMSPie = [841, 517, 3573];   //array to hold daily data to generate pie chart for medical surgical beds
+        const dataIcuPie = [220, 232, 428];  //array to hold daily data to generate pie chart for ICU beds
+        const dataVentPie = [891, 121, 323];  //array to hold daily data to generate pie chart for ventilated patients
+
+        const dataLineChartED = [213, 456, 4898, 4535, 458, 465, 158, 5654, 546]; //array to hold daily data to generate line chart for ED patients 4/2020-current
+        const dataLineChartAd = [6546, 4642, 4565, 789, 423, 68, 489, 654]; //array to hold daily data to generate line chart for Admit 4/2020-current
+        const dataLineChartInp = [658, 898, 435, 898, 74, 4598, 6543, 6, 9879]; //array to hold daily data to generate line chart for Inpatients 4/2020-current
+
+
+        //number threshold levels so that the numbers can change colors based on their value
+
+        const EDDataHighThreshold = 500; //threshold at which number changes color
+        const EDDataLowThreshold = 150;
+        const AdmitDataHighThreshold = 100;//threshold at which number changes color
+        const AdmitDataLowThreshold = 50;
+        const InptDataHighThreshold = 300;//threshold at which number changes color
+        const InptDataLowThreshold = 100;
+
+
+        function findEDNumber() {
+            for (let i = 0, EDDataAllNumber.length-1, i++ )
+                dataEDNumber = EDDataAllNumber;
+        }
+
+
+
+
+    
+
+</script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

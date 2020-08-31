@@ -1,8 +1,13 @@
 //global variables for linking to webEOC data
 
-const dataEDNumber = 251;//number of daily + patients seen in ED
-const dataAdNumber = 75;// number of daily + patients admitted
-const dataInptNumber = 237; //number of daily + patients as inpatients
+const dataEDNumber = [];//number of daily + patients seen in ED
+
+
+const dataAdNumber = [];// number of daily + patients admitted
+
+
+const dataInptNumber = []; //number of daily + patients as inpatients
+
 
 const dataMSPie = [841, 517, 3573];   //array to hold daily data to generate pie chart for medical surgical beds
 const dataIcuPie = [220, 232, 428];  //array to hold daily data to generate pie chart for ICU beds
@@ -56,6 +61,39 @@ $(document).ready(
         //place the current day/date in the header field
 
         getCurrentDay();
+
+
+        //For loops to get the last value in the field
+
+        function positivePtsED() {
+            let EDNumberLength = dataEDNumber.length;
+            for (var i = 0; i < EDNumberLength; i++) {
+                var item = dataEDNumber[i];
+
+                console.log('Ed Number is ' +item);
+
+            }
+        }
+
+
+        function positiveAdmissions() {
+            let AdmitNumberLength = dataAdNumber.length;
+            for (var i = 0; i < AdmitNumberLength; i++) {
+                var item = dataAdNumber[i];
+                console.log('Admit number is '+item);
+            }
+        }
+
+        function positiveInpatients() {
+            let InptNumberLength = dataInptNumber.length;
+            for (var i = 0; i < InptNumberLength; i++) {
+                var item = dataInptNumber[i];
+                console.log("inpt number is " +item);
+            }
+        }
+
+        positivePtsED();
+
 
 
         //To insert the numbers into the appropriate block
