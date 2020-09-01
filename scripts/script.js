@@ -1,12 +1,12 @@
 //global variables for linking to webEOC data
 
-const dataEDNumber = [];//number of daily + patients seen in ED
+const dataEDNumber = [300];//number of daily + patients seen in ED
 
 
-const dataAdNumber = [];// number of daily + patients admitted
+const dataAdNumber = [200];// number of daily + patients admitted
 
 
-const dataInptNumber = []; //number of daily + patients as inpatients
+const dataInptNumber = [100]; //number of daily + patients as inpatients
 
 
 const dataMSPie = [841, 517, 3573];   //array to hold daily data to generate pie chart for medical surgical beds
