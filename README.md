@@ -1,2 +1,2 @@
-# Dashboard_Hospital
- New complete rewrite of the Hospital Capacity dashboard
+# HospitalCapacityDashboard
+ Dashboard created will later be imported into WebEOC

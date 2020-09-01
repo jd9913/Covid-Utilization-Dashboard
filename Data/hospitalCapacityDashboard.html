@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+
+    <title>Hospital Capacity Dashboard</title>
+    <link rel="stylesheet" href="./StyleSheet1.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <script src="./hospitalCapacityDashboard.js"></script>
+</head>
+<body>
+    <header>
+        <h1 class="graphTitle">Hospital Capacity Dashboard</h1>
+    </header>
+    <div class="dashboardGraphs" id="dashboard">
+        <section class="covidEDGraph" id="covidED">
+            <h2>COVID + Seen in ED</h2>
+            <div style="width: 400px; height: 400px">
+                <canvas id="covidEDGraph"></canvas>
+            </div>
+            
+        </section>
+        <section class="covidAdmitGraph" id="covidAdmit">
+            <div style="width: 400px; height: 400px">
+                <h2>COVID + Admissions</h2>
+                <canvas id="covidAdmitGraph"></canvas>
+            </div>
+            
+        </section>
+        <section class="covidInptGraph" id="covidInpt">
+            <h2>COVID + Inpatients</h2>
+            <div style="width: 400px; height: 400px">
+                <canvas id="covidInptGraph"></canvas>
+            </div>
+            
+        </section>
+        <section class="lineGraph" id="lineData">
+            <h2>COVID Line graph</h2>
+            <div style="width: 400px; height: 400px">
+                <canvas id="lineGraph"></canvas>
+            </div>
+            
+        </section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
