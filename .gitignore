@@ -16,3 +16,8 @@ RE_ current data and need chart feedback.pdf
 data_Aug18-Aug24/EMResource Bed Poll workbook.csv
 *.xlsx
 *.csv
+Data/APICall_withCreds.js
+Data/APICall_withCreds.vb
+scripts/webEOCAPICall.js
+XMLCalls/APICall_withCreds.js
+XMLCalls/APICall_withCreds.vbs
