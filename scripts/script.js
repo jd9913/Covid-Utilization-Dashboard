@@ -53,10 +53,10 @@ let lineGraphLineInp = []; //line label for inpatients line
 function openWebEocSession(creds) {
 
     creds = {
-        'username': "",
-        'password': "",
-        'position': '',
-        'incident': ''
+        'username': username,
+        'password': password,
+        'position': position,
+        'incident': incident
     };
 
 
@@ -73,9 +73,6 @@ function openWebEocSession(creds) {
 
 
 
-
-
-
 //current date in header
 
 function getCurrentDay() {
@@ -85,7 +82,6 @@ function getCurrentDay() {
 
     $('#currentDay').text(currentDay);
 }
-
 
 
 
