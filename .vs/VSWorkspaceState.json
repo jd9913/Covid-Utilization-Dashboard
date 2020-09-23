@@ -1,10 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Content",
-    "\\obj",
-    "\\Scripts"
+    "\\Data",
+    "\\scripts"
   ],
-  "SelectedNode": "\\Scripts\\script.js",
   "PreviewInSolutionExplorer": false
 }
