@@ -1,4 +1,5 @@
 
+
 //global variables for linking to webEOC data
 
 let dataEDNumber = 0;//number of daily + patients seen in ED
@@ -13,7 +14,7 @@ let dataLineChartED = []; //array to hold daily data to generate line chart for 
 let dataLineChartAd = []; //array to hold daily data to generate line chart for Admit 4/2020-current
 let dataLineChartInp = []; //array to hold daily data to generate line chart for Inpatients 4/2020-current
 
-let allData = {}; //object to hold all returned JSON data
+let allData = {};
 
 //number threshold levels so that the numbers can change colors based on their value
 
@@ -23,11 +24,6 @@ let AdmitDataHighThreshold = 100;//threshold at which number changes color
 let AdmitDataLowThreshold = 50;
 let InptDataHighThreshold = 300;//threshold at which number changes color
 let InptDataLowThreshold = 100;
-
-const baseURL = "https://webeoc.maricopa.gov/eoc7/api/rest.svc";
-const boardURL = "/board/Hospital_Capacity/display/dashboardData";
-
-//function to get all data to populate graphs
 
 
 
@@ -41,35 +37,10 @@ const pieChartLabels = ["Available", "COVID-19 +", "Other"];
 //Line graph
 
 const covidLineEl = document.getElementById('covidLine'); //referencing the block for the three covid positive lines
-const lineGraphLabels = ["day1", "day2", "day3", "day4", "day5"]; //x axis labels for line dataset, Dates
+let lineGraphLabels = ["day1", "day2", "day3", "day4", "day5"]; //x axis labels for line dataset, Dates
 let lineGraphLineED = []; //line labels for ED patients line
 let lineGraphLineAd = []; //line labels for Admitted patients lines
 let lineGraphLineInp = []; //line label for inpatients line
-
-
-
-
-
-function openWebEocSession(creds) {
-
-    creds = {
-        'username': username,
-        'password': password,
-        'position': position,
-        'incident': incident
-    };
-
-
-
-    var data = new XMLHttpRequest();
-    data.open('POST', baseURL + '/sessions', false);
-    data.setRequestHeader('Content-type', 'application/json');
-    data.setRequestHeader('Access-Control-Allow-Origin')
-
-    data.send(creds);
-};
-
-
 
 
 
@@ -84,34 +55,29 @@ function getCurrentDay() {
 }
 
 
-
 //place the current day/date in the header field
 
 getCurrentDay();
 
-getData();
 
 
+//get simulated data from a file
 
 function getData() {
-
-    openWebEocSession();
-
     var data = new XMLHttpRequest();
-    data.open('GET', baseURL + boardURL, true);
-
-    data.onload = function () {
-
-        if (this.status == 200) {
-
-            let allData = JSON.parse(this.responseText);
-
-            populateAllVariables(allData);
+    data.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            allData = JSON.parse(this.responseText);
         }
-    }
-
+    };
+    data.open('GET', "./Data/simulatedData.json", true);
     data.send();
+    populateAllVariables(allData);
 }
+
+
+getData();
+
 
 function populateAllVariables(allData) {
 
@@ -142,267 +108,288 @@ function populateAllVariables(allData) {
     var labelDates = new Date(lineGraphLabels);
 
 
-    function getSingleDate(singleDate) {
+    console.log(lineGraphLabels);
 
 
 
-        singleDate = Math.max(...lineGraphLabels);
 
-        return singleDate;
+    function getSingleDate(lineGraphLabels) {
+
+        let singleDate = [];
+
+        for (let i = 0; i > lineGraphLabels.length; i++) {
+
+            if (Math.max(lineGraphLabels[i].DataDate)) {
+
+                singleDate.push(lineGraphLabels[i].dataid, lineGraphLabels[i].DataDate);
+            };
 
 
+            // singleDate = [dataid,(Math.max(...lineGraphLabels))];
+
+            // const newSingle = [dataid, singleDate];
+
+            console.log(newSingle);
+
+
+        };
     };
-
-
     getSingleDate();
 
 
-    function getSingleNumbers(dataEDNumber1, dataAdNumber1, dataInptNumber1, singleDate) {
-
-
-
-        dataEDNumber = dataEDNumber1.filter(function (item) {
-            dataid.singleDate = dataid.dataEDNumber1
-        });
-
-        return dataEDNumber;
 
 
 
 
-        dataAdNumber = dataAdNumber1.filter(function (item) {
-            dataid.singleDate = dataid.dataAdNumber1
-        });
-        return dataAdNumber;
-
-
-
-        dataInptNumber = dataInptNumber1.filter(function (item) {
-            dataid.singleDate = dataid.dataInptNumber1
-        });
-        return dataInptNumber;
-
-
-    };
-
-    getSingleNumbers();
-
-    console.log(dataEDNumber, dataAdNumber, dataInptNumber);
-
-
-
-
-    console.log(labelDates);
-
-
-    console.log(lineGraphLabels);
-
-    console.log('new Array' + currentNumDate);
-    console.log('EDNum: ' + dataEDNumber1);
-    //console.log(typeof dataEDNumber);
-    //console.log('EDLine: ' + dataLineChartED);
-    //console.log(typeof dataLineChartED);
-    //console.log('AdmitLine: ' + dataLineChartAd);
-    //console.log(typeof dataLineChartAd);
-    //console.log('Inp Line: ' + dataLineChartInp);
-    //console.log('labels: ' + lineGraphLabels);
-    console.log(allData);
+    function getSingleNumbers(dataEDNumber1, dataAdNumber1, dataInptNumber1) {
 
 
 
 
 
 
+        newSingle = dataEDNumber1;
 
-    //To insert the numbers into the appropriate block
+        dataEDNumber = EDPosPts;
 
-    function getEDNumber() {
-        //referencing the block for the numbers at the top
-        $('#covidEDNumber').text(dataEDNumber);
 
-        $('#covidEDNumber').removeClass();
 
-        if (dataEDNumber > EDDataHighThreshold) {
-            document.getElementById('covidEDNumber').className += "highClass";
-        } else if (dataEDNumber > EDDataLowThreshold) {
-            document.getElementById('covidEDNumber').className += "medClass";
-        } else {
 
-            document.getElementById('covidEDNumber').className += "lowClass";
+
+        function getSingleNumbers(dataEDNumber1, dataAdNumber1, dataInptNumber1, newSingle) {
+
+            newSingle = dataEDNumber1;
+
+            dataEDNumber = EDPosPts;
+
+
+
+
+            dataAdNumber = dataAdNumber1.filter(function (item) {
+                dataid.singleDate = dataid.dataAdNumber1
+            });
+            return dataAdNumber;
+
+
+
+            dataInptNumber = dataInptNumber1.filter(function (item) {
+                dataid.singleDate = dataid.dataInptNumber1
+            });
+            return dataInptNumber;
+
+
+        };
+
+        getSingleNumbers();
+
+        console.log(dataEDNumber, dataAdNumber, dataInptNumber);
+
+
+
+
+        console.log(labelDates);
+
+
+        console.log(lineGraphLabels);
+
+        console.log('new Array' + currentNumDate);
+        console.log('EDNum: ' + dataEDNumber1);
+        //console.log(typeof dataEDNumber);
+        //console.log('EDLine: ' + dataLineChartED);
+        //console.log(typeof dataLineChartED);
+        //console.log('AdmitLine: ' + dataLineChartAd);
+        //console.log(typeof dataLineChartAd);
+        //console.log('Inp Line: ' + dataLineChartInp);
+        //console.log('labels: ' + lineGraphLabels);
+        console.log(allData);
+
+
+
+        //To insert the numbers into the appropriate block
+
+        function getEDNumber() {
+            //referencing the block for the numbers at the top
+            $('#covidEDNumber').text(dataEDNumber);
+
+            $('#covidEDNumber').removeClass();
+
+            if (dataEDNumber > EDDataHighThreshold) {
+                document.getElementById('covidEDNumber').className += "highClass";
+            } else if (dataEDNumber > EDDataLowThreshold) {
+                document.getElementById('covidEDNumber').className += "medClass";
+            } else {
+
+                document.getElementById('covidEDNumber').className += "lowClass";
+            }
+        };
+
+
+        function getAdmitNumber() {
+            //referencing the block for the numbers at the top
+            $('#covidAdmitNumber').text(dataAdNumber);
+
+            $('#covidAdmitNumber').removeClass();
+
+            if (dataAdNumber > AdmitDataHighThreshold) {
+                document.getElementById('covidAdmitNumber').className += "highClass";
+            } else if (dataAdNumber > AdmitDataLowThreshold) {
+                document.getElementById('covidAdmitNumber').className += "medClass";
+            } else {
+
+                document.getElementById('covidAdmitNumber').className += "lowClass";
+            }
+        };
+
+
+        function getInptNumber() {
+            //referencing the block for the numbers at the top
+            $('#covidInptNumber').text(dataInptNumber)
+
+            $('#covidInptNumber').removeClass();
+
+            if (dataInptNumber > InptDataHighThreshold) {
+                document.getElementById('covidInptNumber').className += "highClass";
+            } else if (dataInptNumber > InptDataLowThreshold) {
+                document.getElementById('covidInptNumber').className += "medClass";
+            } else {
+
+                document.getElementById('covidInptNumber').className += "lowClass";
+            }
         }
-    };
-
-
-    function getAdmitNumber() {
-        //referencing the block for the numbers at the top
-        $('#covidAdmitNumber').text(dataAdNumber);
-
-        $('#covidAdmitNumber').removeClass();
-
-        if (dataAdNumber > AdmitDataHighThreshold) {
-            document.getElementById('covidAdmitNumber').className += "highClass";
-        } else if (dataAdNumber > AdmitDataLowThreshold) {
-            document.getElementById('covidAdmitNumber').className += "medClass";
-        } else {
-
-            document.getElementById('covidAdmitNumber').className += "lowClass";
-        }
-    };
-
-
-    function getInptNumber() {
-        //referencing the block for the numbers at the top
-        $('#covidInptNumber').text(dataInptNumber)
-
-        $('#covidInptNumber').removeClass();
-
-        if (dataInptNumber > InptDataHighThreshold) {
-            document.getElementById('covidInptNumber').className += "highClass";
-        } else if (dataInptNumber > InptDataLowThreshold) {
-            document.getElementById('covidInptNumber').className += "medClass";
-        } else {
-
-            document.getElementById('covidInptNumber').className += "lowClass";
-        }
-    }
 
 
 
-    //call the functions to insert the daily number fields above the graphs
+        //call the functions to insert the daily number fields above the graphs
 
-    getEDNumber();
-    getAdmitNumber();
-    getInptNumber();
-
-
-    //4 graph data references
-    var MSctx = medSurgGraphEl;
-    var ICUctx = icuGraphEl;
-    var Ventctx = ventGraphEl;
-    var Linectx = covidLineEl;
+        getEDNumber();
+        getAdmitNumber();
+        getInptNumber();
 
 
-
-    // Global + Custom Chart Config Options
-
-    var options = {
-        bezierCurve: false,
-        animation: true,
-        animationEasing: "easeOutQuart",
-        showScale: false,
-        tooltipEvents: ["mousemove", "touchstart", "touchmove"],
-        tooltipCornerRadius: 3,
-        pointDot: true,
-        pointDotRadius: 4,
-        datasetFill: true,
-        scaleShowLine: true,
-        animationEasing: "easeOutBounce",
-        animateRotate: true,
-        animateScale: true
-    };
-
-    // med surg graph
-
-
-    var medSurgGraph = new Chart(MSctx, {
-        type: "pie",
-        data: {
-            labels: pieChartLabels,
-            datasets: [{
-                label: "Medical Surgical Bed Capacity Daily Snapshot",
-                data: dataMSPie,
-                backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
-
-            }]
-
-        },
-        options: options
-    });
+        //4 graph data references
+        var MSctx = medSurgGraphEl;
+        var ICUctx = icuGraphEl;
+        var Ventctx = ventGraphEl;
+        var Linectx = covidLineEl;
 
 
 
-    var ICUGraph = new Chart(ICUctx, {
+        // Global + Custom Chart Config Options
 
-        // ICU bed graph
+        var options = {
+            bezierCurve: false,
+            animation: true,
+            animationEasing: "easeOutQuart",
+            showScale: false,
+            tooltipEvents: ["mousemove", "touchstart", "touchmove"],
+            tooltipCornerRadius: 3,
+            pointDot: true,
+            pointDotRadius: 4,
+            datasetFill: true,
+            scaleShowLine: true,
+            animationEasing: "easeOutBounce",
+            animateRotate: true,
+            animateScale: true
+        };
 
-        type: "pie",
-        data: {
-            labels: pieChartLabels,
-            datasets: [{
-                label: "ICU Bed Capacity Daily Snapshot",
-                data: dataIcuPie,
-                backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
+        // med surg graph
 
 
-            }]
-        },
-        options: options
-    });
+        var medSurgGraph = new Chart(MSctx, {
+            type: "pie",
+            data: {
+                labels: pieChartLabels,
+                datasets: [{
+                    label: "Medical Surgical Bed Capacity Daily Snapshot",
+                    data: dataMSPie,
+                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
 
-
-    // ventilated patients graph
-    var ventGraph = new Chart(Ventctx, {
-        type: "pie",
-        data: {
-            labels: pieChartLabels,
-            datasets: [{
-                label: "Ventilated Capacity Daily Snapshot",
-                backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
-                data: dataVentPie,
-
-            }]
-        },
-        options: options
-    });
-
-    var lineGraphTime = new Chart(Linectx, {
-
-        type: "line",
-        data: {
-            labels: lineGraphLabels,
-
-            datasets: [
-                {
-                    label: lineGraphLineED,
-                    fillColor: "rgba(65,89,207,0.2)",
-                    strokeColor: "rgba(220,220,220,1)",
-                    pointColor: "rgba(220,220,220,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
-                    data: dataLineChartED
-                },
-                {
-                    label: lineGraphLineAd,
-                    fillColor: "rgba(65,207,136,0.2)",
-                    strokeColor: "rgba(151,187,205,1)",
-                    pointColor: "rgba(151,187,205,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(151,187,205,1)",
-                    data: dataLineChartAd
-                },
-
-                {
-                    label: lineGraphLineInp,
-                    fillColor: "rgba(168,34,135,0.2)",
-                    strokeColor: "rgba(151,187,205,1)",
-                    pointColor: "rgba(151,187,205,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(151,187,205,1)",
-                    data: dataLineChartInp
                 }]
 
-        },
-    });
-
-}
-
+            },
+            options: options
+        });
 
 
-//    dataEDNumber = allData.filter(e => {
-          //      var d = new Date(e.DataDate);
-             //   return d.EDPosPts == numberDate.EDPosPts;
-           // })[0];
+
+        var ICUGraph = new Chart(ICUctx, {
+
+            // ICU bed graph
+
+            type: "pie",
+            data: {
+                labels: pieChartLabels,
+                datasets: [{
+                    label: "ICU Bed Capacity Daily Snapshot",
+                    data: dataIcuPie,
+                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
+
+
+                }]
+            },
+            options: options
+        });
+
+
+        // ventilated patients graph
+        var ventGraph = new Chart(Ventctx, {
+            type: "pie",
+            data: {
+                labels: pieChartLabels,
+                datasets: [{
+                    label: "Ventilated Capacity Daily Snapshot",
+                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f"],
+                    data: dataVentPie,
+
+                }]
+            },
+            options: options
+        });
+
+        var lineGraphTime = new Chart(Linectx, {
+
+            type: "line",
+            data: {
+                labels: lineGraphLabels,
+
+                datasets: [
+                    {
+                        label: lineGraphLineED,
+                        fillColor: "rgba(65,89,207,0.2)",
+                        strokeColor: "rgba(220,220,220,1)",
+                        pointColor: "rgba(220,220,220,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data: dataLineChartED
+                    },
+                    {
+                        label: lineGraphLineAd,
+                        fillColor: "rgba(65,207,136,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: dataLineChartAd
+                    },
+
+                    {
+                        label: lineGraphLineInp,
+                        fillColor: "rgba(168,34,135,0.2)",
+                        strokeColor: "rgba(151,187,205,1)",
+                        pointColor: "rgba(151,187,205,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(151,187,205,1)",
+                        data: dataLineChartInp
+                    }]
+
+            },
+        });
+
+    };
+};
+
+
 
