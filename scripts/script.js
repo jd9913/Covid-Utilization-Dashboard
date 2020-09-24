@@ -70,7 +70,7 @@ function getData() {
             allData = JSON.parse(this.responseText);
         }
     };
-    data.open('GET', "./Data/simulatedData.json", true);
+    data.open('GET', 'https://github.com/jd9913/simulated-data.git', true);
     data.send();
     populateAllVariables(allData);
 }
