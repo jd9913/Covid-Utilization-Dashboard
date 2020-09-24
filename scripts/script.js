@@ -108,7 +108,7 @@ function Login() {
 
 function getData(data) {
 
-     data = new XMLHttpRequest();
+    data = new XMLHttpRequest();
     data.open('GET', baseURL + boardURL, true);
     data.onload = function () {
         if (this.status == 200) {
@@ -122,7 +122,33 @@ function getData(data) {
 }
 
 
-getData();
+function sessionCookie() {
+    var javaScriptSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+
+    string serializedCreds = javaScriptSerializer.Serialize(creds);
+
+    System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
+
+    Byte[] byteArray = encoding.GetBytes(serializedCreds);
+
+    request.ContentLength = byteArray.Length;
+
+    request.ContentType = @"application/json";
+
+    using(Stream dataStream = request.GetRequestStream())
+    {
+        dataStream.Write(byteArray, 0, byteArray.Length);
+    }
+    request.GetResponse();
+
+    //Return the session cookie for use by future requests.
+    CookieCollection cc = request.CookieContainer.GetCookies(new Uri("http://localhost:52598"));
+    return cc["ASP.NET_SessionId"];
+}
+
+
+
+getData(sessionCoodkie);
 
 
 function populateAllVariables(allData) {
