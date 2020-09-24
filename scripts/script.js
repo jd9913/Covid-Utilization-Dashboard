@@ -1,4 +1,11 @@
 
+const username = 'jennifer.schlierman@marcopa.gov';
+const password = '01Adel@ide';
+const position = 'MCDEM EOC Technology';
+const incident = 'MCDPH 2019 Coronavirus (nCoV)';
+
+const baseURL = "https://webeoc.maricopa.gov/eoc7/api/rest.svc";
+const boardURL = "/board/Hospital_Capacity/display/dashboardData";
 
 //global variables for linking to webEOC data
 
@@ -63,16 +70,55 @@ getCurrentDay();
 
 //get simulated data from a file
 
-function getData() {
-    var data = new XMLHttpRequest();
-    data.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            allData = JSON.parse(this.responseText);
-        }
+
+function Login() {
+
+    let credentials = {
+        'username': username,
+        'password': password,
+        'position': position,
+        'incident': incident
     };
-    data.open('GET', 'https://github.com/jd9913/simulated-data.git', true);
-    data.send();
-    populateAllVariables(allData);
+
+    console.log(credentials);
+    let creds = JSON.stringify(credentials);
+    console.log(creds);
+
+
+    function openWebEocSession(creds) {
+
+        Login();
+        console.log(creds);
+
+        let data = new XMLHttpRequest();
+        data.open('POST', baseURL + '/sessions', false);
+
+        data.withCredentials = true;
+        data.setRequestHeader('Content-type', 'application/json');
+
+        data.setRequestHeader('Cache-Control', 'no-store');
+        data.setRequestHeader('Access-Control-Allow-Credentials', true);
+
+
+
+        data.send(creds);
+    };
+    openWebEocSession(data);
+};
+
+function getData(data) {
+
+     data = new XMLHttpRequest();
+    data.open('GET', baseURL + boardURL, true);
+    data.onload = function () {
+        if (this.status == 200) {
+            let allData = JSON.parse(this.responseText);
+            populateAllVariables(allData);
+        }
+    }
+    data.send(data);
+
+
 }
 
 

@@ -17,8 +17,9 @@ function openWebEocSession(creds) {
 
     var data = new XMLHttpRequest();
     data.open('POST', baseURL + '/sessions', false);
+    data.withCredentials = true;
     data.setRequestHeader('Content-type', 'application/json');
-    data.setRequestHeader('Access-Control-Allow-Origin')
+    Origin: https://www.maricopa.gov;
 
     data.send(creds);
 };
@@ -77,4 +78,16 @@ function getData() {
     populateAllVariables(allData);
 }
 
+
+function getData() {
+    var data = new XMLHttpRequest();
+    data.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            allData = JSON.parse(this.responseText);
+        }
+    };
+    data.open('GET', 'http://localhost:8000/simulatedData.json', true);
+    data.send();
+    populateAllVariables(allData);
+}
 
