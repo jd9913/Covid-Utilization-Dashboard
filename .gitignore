@@ -1,4 +1,4 @@
-
+node_modules
 .vs/HospitalCapacity/config/applicationhost.config
 .vs/HospitalCapacity/v16/.suo
 <<<<<<< HEAD
@@ -21,3 +21,14 @@ Data/APICall_withCreds.vb
 scripts/webEOCAPICall.js
 XMLCalls/APICall_withCreds.js
 XMLCalls/APICall_withCreds.vbs
+.vs/Dashboard_Hospital/v16/.suo
+.vs/Dashboard_Hospital/v16/.suo
+.vs/HospitalCapacityData/v16/.suo
+*.sqlite
+*.config
+CapacityDashboard_sim/.vs/CapacityDashboard_sim/v16/.suo
+*.dll
+*.njsproj
+*.user
+node_modules
+*.csproj

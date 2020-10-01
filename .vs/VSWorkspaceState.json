@@ -1,11 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Data",
-    "\\scripts",
-    "\\server",
-    "\\XMLCalls"
+    "\\data",
+    "\\scripts"
   ],
-  "SelectedNode": "\\scripts\\script.js",
+  "SelectedNode": "\\scripts\\index.js",
   "PreviewInSolutionExplorer": false
 }
