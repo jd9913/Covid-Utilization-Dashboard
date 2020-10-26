@@ -1,21 +1,24 @@
 ﻿<!DOCTYPE html>
-
-
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta content="text/html; charset=utf-8" http-equiv="content-type" />
     <title>Hospital Capacity Dashboard</title>
-    <!-- <link href="css/8.3.0.0/boards.css" rel="stylesheet" media="screen" />
-   <link boardresource="webeoc-fa-4.4.css" rel="stylesheet" media="screen" />-->
+    <link href="css/8.3.0.0/boards.css" rel="stylesheet" media="screen" />
+    <link boardresource="webeoc-fa-4.4.css" rel="stylesheet" media="screen" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-
-    <link href="./content/styles.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" />
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" />
+    <!--  <script boardresource="script.js"/>-->
+    <link boardresource="styles.css" rel="stylesheet" />
 </head>
+
 <body>
     <header class="jumbotron">
         <h1 class="display-4 text-center font-weight-bold">Hospital Capacity Dashboard</h1>
-        <p id="currentDay" class="lead"></p>
+        <p id="currentDay" class="lead" />
     </header>
     <div class="container">
         <div class="row">
@@ -24,7 +27,7 @@
                     <h3 class="panel-title">Emergency Department</h3>
                 </div>
                 <div class="panel-content text-center dsNumber">
-                    <p id="covidEDNumber"></p>
+                    <p id="covidEDNumber" />
                 </div>
                 <div class="panel-footer">
                     <h4>COVID Positive Patients Seen in ED</h4>
@@ -35,7 +38,7 @@
                     <h3 class="panel-title">Admissions</h3>
                 </div>
                 <div class="panel-content text-center dsNumber">
-                    <p id="covidAdmitNumber"></p>
+                    <p id="covidAdmitNumber" />
                 </div>
                 <div class="panel-footer">
                     <h4>COVID Positive Admissions</h4>
@@ -46,7 +49,7 @@
                     <h3 class="panel-title">Inpatients</h3>
                 </div>
                 <div class="panel-content text-center dsNumber">
-                    <p id="covidInptNumber"></p>
+                    <p id="covidInptNumber" />
                 </div>
                 <div class="panel-footer">
                     <h4>COVID Positive Inpatients</h4>
@@ -57,7 +60,7 @@
                     <h3 class="panel-title">Medical Surgical Beds</h3>
                 </div>
                 <div class="panel-content text-center">
-                    <canvas id="medSurgBeds" class="chart"></canvas>
+                    <canvas id="medSurgBeds" class="chart" />
                 </div>
                 <div class="panel-footer">
                     <h4>Available, covid positive and other</h4>
@@ -68,7 +71,7 @@
                     <h3 class="panel-title">ICU Beds</h3>
                 </div>
                 <div class="panel-content text-center">
-                    <canvas id="IcuBeds" class="chart"></canvas>
+                    <canvas id="IcuBeds" class="chart" />
                 </div>
                 <div class="panel-footer">
                     <h4>Available, covid positive and other</h4>
@@ -79,7 +82,7 @@
                     <h3 class="panel-title">Ventilations</h3>
                 </div>
                 <div class="panel-content text-center">
-                    <canvas id="vents" class="chart"></canvas>
+                    <canvas id="vents" class="chart" />
                 </div>
                 <div class="panel-footer">
                     <h4>Available, covid positive and other</h4>
@@ -94,7 +97,7 @@
                     <h3 class="panel-title">COVID + Line Chart</h3>
                 </div>
                 <div class="panel-content text-center">
-                    <canvas id="covidLine" class="chart"></canvas>
+                    <canvas id="covidLine" class="chart" />
                 </div>
                 <div class="panel-footer">
                     <h4>COVID Positive Patients Line Chart</h4>
@@ -103,60 +106,5 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
-    <script src="./scripts/script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
