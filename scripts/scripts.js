@@ -1,13 +1,28 @@
 
+//THIS FILE IS FOR TRANSFER TO WEBEOC
 
-const getData = () => {
-    $.get("../data/hospital.json", (hospitalData) => {
 
-        let hospitalDataClean = Object.values(hospitalData);
+        const baseURL = "https://webeoc.maricopa.gov/eoc7/api/rest.svc";
+        const boardURL = "/board/HCCapacity/display/dashboardData";
+              
+          function getData() {
+       
+            var data = new XMLHttpRequest();
+            data.open('GET', baseURL + boardURL, false);
+        
+            data.onload = function () {
+        
+                if (this.status == 200) {
+        
+                    let allData = JSON.parse(this.responseText);
+        
+                    populateAllVariables(allData);
+                }
+            }
+        
+            data.send();
+        };
 
-        populateAllVariables(hospitalDataClean);
-    })
-}
 
 //global variables for linking to webEOC data
 
@@ -15,16 +30,16 @@ let dataLineChartED = []; //array to hold daily data to generate line chart for 
 let dataLineChartAd = []; //array to hold daily data to generate line chart for Admit 4/2020-current
 let dataLineChartInp = []; //array to hold daily data to generate line chart for Inpatients 4/2020-current
 
-
+let dateFilter = '4/12/2020';  //date after which data is rendered.
 
 //number threshold levels so that the numbers can change colors based on their value
 
-let EDDataHighThreshold = 500; //threshold at which number changes color
-let EDDataLowThreshold = 150;
-let AdmitDataHighThreshold = 100;//threshold at which number changes color
-let AdmitDataLowThreshold = 50;
-let InptDataHighThreshold = 300;//threshold at which number changes color
-let InptDataLowThreshold = 100;
+let EDDataHighThreshold = ""; //threshold at which number changes color
+let EDDataLowThreshold = "";
+let AdmitDataHighThreshold = "";//threshold at which number changes color
+let AdmitDataLowThreshold = "";
+let InptDataHighThreshold = "";//threshold at which number changes color
+let InptDataLowThreshold = "";
 
 
 
@@ -68,18 +83,13 @@ function getCurrentDay() {
 
 getCurrentDay();
 
-// populateAllVariables(allData)
-
-
-
-
-
+//grab the data from a board
 getData();
 
 
 function populateAllVariables(allData1) {
 
-    let dateFilter = '4/12/2020';
+    
 
     let validDates = allData1.filter(function (data, i) {
 
