@@ -1,3 +1,0 @@
-C:\Users\jennifer.schlierman\source\repos\CapacityDashboard_sim\obj\Debug\CapacityDashboard_sim.njsprojAssemblyReference.cache
-C:\Users\jennifer.schlierman\source\repos\CapacityDashboard_sim\obj\Debug\CapacityDashboard_sim.njsproj.CoreCompileInputs.cache
-C:\Users\jennifer.schlierman\source\repos\CapacityDashboard_sim\bin\Microsoft.NodejsTools.WebRole.dll

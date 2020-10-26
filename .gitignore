@@ -9,7 +9,7 @@
 .vs/VSWorkspaceState.json
 =======
 .vs/slnx.sqlite
-*.json
+
 .vs/HospitalCapacityDashboard/config/applicationhost.config
 .vs/HospitalCapacityDashboard/v16/.suo
 >>>>>>> feature/initial-setup
@@ -21,5 +21,5 @@ data_Aug18-Aug24/EMResource Bed Poll workbook.csv
 node_modules
 *.csv
 *.xlsx
-*.json
+hospital.json
 >>>>>>> initialFiles

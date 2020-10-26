@@ -1,0 +1,28 @@
+{
+  "name": "Dashboard_Hospital",
+  "version": "1.0.0",
+  "description": "Dashboard created will later be imported into WebEOC",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jd9913/Dashboard_Hospital.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jd9913/Dashboard_Hospital/issues"
+  },
+  "homepage": "https://github.com/jd9913/Dashboard_Hospital#readme",
+  "dependencies": {
+    "file-system": "^2.2.2",
+    "requirejs": "^2.3.6",
+    "smartsheet": "^2.101.0"
+  },
+  "devDependencies": {
+    "jest": "^26.4.2"
+  }
+}
