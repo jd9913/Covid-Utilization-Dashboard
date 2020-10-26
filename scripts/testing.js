@@ -1,7 +1,15 @@
 
+
+const getData = () => {
+    $.get("../data/hospital.json", (hospitalData) => {
+
+        let hospitalDataClean = Object.values(hospitalData);
+
+        populateAllVariables(hospitalDataClean);
+    })
+}
+
 //global variables for linking to webEOC data
-
-
 
 let dataLineChartED = []; //array to hold daily data to generate line chart for ED patients 4/2020-current
 let dataLineChartAd = []; //array to hold daily data to generate line chart for Admit 4/2020-current
@@ -39,7 +47,7 @@ const pieChartLabels = ["Available", "COVID-19 +", "Other"];
 //Line graph
 
 const covidLineEl = document.getElementById('covidLine'); //referencing the block for the three covid positive lines
-let lineGraphLabels = ["day1", "day2", "day3", "day4", "day5"]; //x axis labels for line dataset, Dates
+let lineGraphLabels = []; //x axis labels for line dataset, Dates
 let lineGraphLineED = ['COVID + ED']; //line labels for ED patients line
 let lineGraphLineAd = ['COVID + Admits']; //line labels for Admitted patients lines
 let lineGraphLineInp = ['COVID + Inpatients']; //line label for inpatients line
@@ -64,14 +72,7 @@ getCurrentDay();
 
 
 
-const getData = () => {
-    $.get("../data/hospital.json", (hospitalData) => {
 
-        let hospitalDataClean = Object.values(hospitalData);
-
-        populateAllVariables(hospitalDataClean);
-    })
-}
 
 getData();
 
@@ -93,25 +94,25 @@ function populateAllVariables(allData1) {
         let date1 = new Date(a.DataDate);
         let date2 = new Date(b.DataDate);
 
-        return (date2 - date1);//sort string ascending   
+        return (date1 - date2);//sort string ascending   
     })
 
 
     dataLineChartED = allData.map((data) => {
 
-        return [(data.edCovidPts)];
+        return (data.edCovidPts);
     });
 
 
     dataLineChartAd = allData.map((data) => {
 
-        return [(data.covid_Admissions)];
+        return (data.covid_Admissions);
     });
 
 
     dataLineChartInp = allData.map((data) => {
 
-        return [(data.covid_Inpatients)];
+        return (data.covid_Inpatients);
     });
 
 
@@ -411,9 +412,9 @@ function populateAllVariables(allData1) {
 
     let lineOptions = {
 
-        //     // tooltipEvents: ["mousemove", "touchstart", "touchmove"],
-        //     // pointDot: true,
-        //     // pointDotRadius: 4,
+        tooltipEvents: ["mousemove", "touchstart", "touchmove"],
+        pointDot: true,
+        pointDotRadius: 4,
         layout: {
             padding: -5,
         },
@@ -446,7 +447,7 @@ function populateAllVariables(allData1) {
             }]
 
         },
-        options: options
+        options: lineOptions
     });
 
 
@@ -465,7 +466,7 @@ function populateAllVariables(allData1) {
 
             }]
         },
-        options: options
+        options: lineOptions
     });
 
     // ventilated patients graph
@@ -480,7 +481,7 @@ function populateAllVariables(allData1) {
 
             }]
         },
-        options: options
+        options: lineOptions
     });
 
     console.log(dataLineChartAd);

@@ -17,11 +17,7 @@
     "url": "https://github.com/jd9913/Dashboard_Hospital/issues"
   },
   "homepage": "https://github.com/jd9913/Dashboard_Hospital#readme",
-  "dependencies": {
-    "file-system": "^2.2.2",
-    "requirejs": "^2.3.6",
-    "smartsheet": "^2.101.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "jest": "^26.4.2"
   }
