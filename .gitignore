@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 .vs/HospitalCapacity/config/applicationhost.config
 .vs/HospitalCapacity/v16/.suo
@@ -16,3 +17,9 @@ RE_ current data and need chart feedback.pdf
 data_Aug18-Aug24/EMResource Bed Poll workbook.csv
 *.xlsx
 *.csv
+=======
+node_modules
+*.csv
+*.xlsx
+*.json
+>>>>>>> initialFiles
