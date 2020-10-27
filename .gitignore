@@ -15,11 +15,9 @@
 >>>>>>> feature/initial-setup
 RE_ current data and need chart feedback.pdf
 data_Aug18-Aug24/EMResource Bed Poll workbook.csv
-*.xlsx
-*.csv
+
 =======
 node_modules
-*.csv
 *.xlsx
-hospital.json
+*.csv
 >>>>>>> initialFiles
