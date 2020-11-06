@@ -134,7 +134,8 @@ function populateAllVariables(allData1) {
 
     });
 
-
+  
+    
 
     //filtering for medsurge data to populate pie charts
     let medsurgDataAvail = allData.map((data) => {
@@ -142,18 +143,17 @@ function populateAllVariables(allData1) {
         return [(data.medSurgBed_Avail), (new Date(data.DataDate))];
     });
 
-    //console.log(medsurgDataAvail);
+
 
     function medsurgPieAvail() {
         let max1 = medsurgDataAvail.reduce((a, b) => {
 
-            // console.log(a);
-            // console.log(b);
+           
 
             return a[1] > b[1] ? a : b;
         });
 
-        //console.log(max1);
+       
 
         return [max1[0]];
     }
@@ -291,11 +291,10 @@ function populateAllVariables(allData1) {
 
     function adMax() {
         let max1 = adSingle.reduce((a, b) => {
-            // console.log(a);
-            // console.log(b);
+            
             return a[1] > b[1] ? a : b;
         });
-        // console.log(max1);
+       
         return parseInt(max1[0]) //function being reduced has 2 key/value pairs in each object.  reducing to max in value index 1 then returning value index 0;
 
     }
@@ -494,7 +493,7 @@ function populateAllVariables(allData1) {
         options: lineOptions
     });
 
-    console.log(dataLineChartAd);
+   
 
     var lineGraphTime = new Chart(Linectx, {
 

@@ -7,6 +7,12 @@ body{
     font-size: 10rem;
 }
 
+.lastDate{
+    font-style: italic;
+    font-weight: bold;
+    color: red;
+    font-size: .25em;
+}
 
 .jumbotron {
     font-size: 5em;
@@ -17,6 +23,7 @@ body{
     text-align: center;
     font-weight: bold;
 }
+
 
 
 .chart {
