@@ -394,36 +394,45 @@ function populateAllVariables(allData1) {
     // Global + Custom Chart Config Options
 
     let options = {
-        // bezierCurve: true,
-        // animation: true,
-        // animationEasing: "easeOutQuart",
-        // showScale: true,
-        // tooltipEvents: ["mousemove", "touchstart", "touchmove"],
-        // tooltipCornerRadius: 3,
-        // pointDot: true,
-        // pointDotRadius: 4,
-        // datasets:
-        //     { fill: false, },
-        // scaleShowLine: true,
-        // animationEasing: "easeOutBounce",
-        // animateRotate: true,
-        // animateScale: true,
-        // responsive: true,
-        // legend: {
-        //     display: true,
-        //     position: 'bottom',
-        //     Labels: {
-        //         fontColor: fontColor,
-        //         fontFamily: "'Arial','sans-serif', 'Helvetica'",
-        //         fontSize: 10,
-        //        generateLabels: true,
+        
+        tooltipEvents: ["mousemove", "touchstart", "touchmove"],
+        pointDot: true,
+        pointDotRadius: 4,
+        layout: {
+            padding: 0,
+        },
+        responsive: true,
+        legend: {
+            display: true,
+            position: 'bottom',
 
-        //     }
-        // }
-
+            Labels: {
+                fontColor: fontColor,
+                fontFamily: "'Arial','sans-serif', 'Helvetica'",
+                fontSize: 10,
+                generateLabels: true,
+            }
+        }
     };
 
+    
+
     let lineOptions = {
+        scales:{
+            yAxes:[{
+                ticks:{
+                                      
+                    stepSize:150
+                }
+            }]
+            // xAxes:[{
+            //     type: 'time',
+            //     time:{
+            //         unit: 'week'
+            //     }
+              
+            // }]
+        },
 
         tooltipEvents: ["mousemove", "touchstart", "touchmove"],
         pointDot: true,
@@ -460,7 +469,7 @@ function populateAllVariables(allData1) {
             }]
 
         },
-        options: lineOptions
+        options: options
     });
 
 
@@ -479,7 +488,7 @@ function populateAllVariables(allData1) {
 
             }]
         },
-        options: lineOptions
+        options: options
     });
 
     // ventilated patients graph
@@ -494,7 +503,7 @@ function populateAllVariables(allData1) {
 
             }]
         },
-        options: lineOptions
+        options: options
     });
 
    
