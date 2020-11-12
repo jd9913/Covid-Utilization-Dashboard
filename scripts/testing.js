@@ -383,6 +383,18 @@ function populateAllVariables(allData1) {
     getInptNumber();
 
 
+//Get capacity numbers for pie charts
+
+//Capacity for MS Beds
+
+//Capacity for ICU Beds
+
+//Capacity for Vents
+
+
+
+
+
     //4 graph data references
     var MSctx = medSurgGraphEl;
     var ICUctx = icuGraphEl;
@@ -415,8 +427,7 @@ function populateAllVariables(allData1) {
         }
     };
 
-    
-
+   
     let lineOptions = {
         scales:{
             yAxes:[{
