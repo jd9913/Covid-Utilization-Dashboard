@@ -60,7 +60,7 @@ function getCurrentDay() {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     let currentDay = event.toLocaleDateString(undefined, options);
 
-    $('#currentDay').text("Today's Date: "+currentDay);
+    $('#currentDay').text("Today's Date: " + currentDay);
 }
 
 
@@ -124,22 +124,23 @@ function populateAllVariables(allData1) {
 
     });
 
+    console.dir(lineGraphLabels);
 
-    function popLastDate(){
-          
+    function popLastDate() {
+
         const options = { year: 'numeric', month: 'short', day: 'numeric' };
-        
-        const lastDate1= lineGraphLabels.slice(-1);
-        const D=new Date(lastDate1);
-        
-        const lastDate=((D.getMonth()+1)+"/"+D.getDate()+"/"+D.getFullYear());
-             
-   
-       $('#lastDataDate').text("DATA SNAPSHOT AS OF: "+lastDate);
-        
-      };
-      
-      popLastDate();
+
+        const lastDate1 = lineGraphLabels.slice(-1);
+        const D = new Date(lastDate1);
+
+        const lastDate = ((D.getMonth() + 1) + "/" + D.getDate() + "/" + D.getFullYear());
+
+
+        $('#lastDataDate').text("DATA SNAPSHOT AS OF: " + lastDate);
+
+    };
+
+    popLastDate();
 
 
     //filtering for medsurge data to populate pie charts
@@ -148,17 +149,17 @@ function populateAllVariables(allData1) {
         return [(data.medSurgBed_Avail), (new Date(data.DataDate))];
     });
 
-    
+
 
     function medsurgPieAvail() {
         let max1 = medsurgDataAvail.reduce((a, b) => {
 
-           
+
 
             return a[1] > b[1] ? a : b;
         });
 
-        
+
         return [max1[0]];
     }
 
@@ -295,10 +296,10 @@ function populateAllVariables(allData1) {
 
     function adMax() {
         let max1 = adSingle.reduce((a, b) => {
-           
+
             return a[1] > b[1] ? a : b;
         });
-        
+
         return parseInt(max1[0]) //function being reduced has 2 key/value pairs in each object.  reducing to max in value index 1 then returning value index 0;
 
     }
@@ -383,13 +384,13 @@ function populateAllVariables(allData1) {
     getInptNumber();
 
 
-//Get capacity numbers for pie charts
+    //Get capacity numbers for pie charts
 
-//Capacity for MS Beds
+    //Capacity for MS Beds
 
-//Capacity for ICU Beds
+    //Capacity for ICU Beds
 
-//Capacity for Vents
+    //Capacity for Vents
 
 
 
@@ -406,44 +407,6 @@ function populateAllVariables(allData1) {
     // Global + Custom Chart Config Options
 
     let options = {
-        
-        tooltipEvents: ["mousemove", "touchstart", "touchmove"],
-        pointDot: true,
-        pointDotRadius: 4,
-        layout: {
-            padding: 0,
-        },
-        responsive: true,
-        legend: {
-            display: true,
-            position: 'bottom',
-
-            Labels: {
-                fontColor: fontColor,
-                fontFamily: "'Arial','sans-serif', 'Helvetica'",
-                fontSize: 10,
-                generateLabels: true,
-            }
-        }
-    };
-
-   
-    let lineOptions = {
-        scales:{
-            yAxes:[{
-                ticks:{
-                                      
-                    stepSize:150
-                }
-            }]
-            // xAxes:[{
-            //     type: 'time',
-            //     time:{
-            //         unit: 'week'
-            //     }
-              
-            // }]
-        },
 
         tooltipEvents: ["mousemove", "touchstart", "touchmove"],
         pointDot: true,
@@ -456,102 +419,160 @@ function populateAllVariables(allData1) {
             display: true,
             position: 'bottom',
 
-            Labels: {
-                fontColor: fontColor,
-                fontFamily: "'Arial','sans-serif', 'Helvetica'",
-                fontSize: 10,
-                generateLabels: true,
+            // Labels: {
+            //     fontColor: fontColor,
+            //     fontFamily: "'Arial','sans-serif', 'Helvetica'",
+            //     fontSize: 10,
+            //     generateLabels: true,
+            // }
+        },
+       
+        plugins: {
+            labels:{
+            showActualPercentages: true,
+            position: 'outside',
+            fontColor: fontColor
+            
             }
         }
-    };
+    
+};
 
-    // med surg graph
-
-
-    var medSurgGraph = new Chart(MSctx, {
-        type: "pie",
-        data: {
-            labels: pieChartLabels,
-            datasets: [{
-                label: "Medical Surgical Bed Capacity Daily Snapshot",
-                data: dataMSPie,
-                backgroundColor: [color1, color2, color3],
-
-            }]
-
-        },
-        options: options
-    });
-
-
-    var ICUGraph = new Chart(ICUctx, {
-
-        // ICU bed graph
-
-        type: "pie",
-        data: {
-            labels: pieChartLabels,
-            datasets: [{
-                label: "ICU Bed Capacity Daily Snapshot",
-                data: dataIcuPie,
-                backgroundColor: [color1, color2, color3],
-
-
-            }]
-        },
-        options: options
-    });
-
-    // ventilated patients graph
-    var ventGraph = new Chart(Ventctx, {
-        type: "pie",
-        data: {
-            labels: pieChartLabels,
-            datasets: [{
-                label: "Ventilated Capacity Daily Snapshot",
-                backgroundColor: [color1, color2, color3],
-                data: dataVentPie,
-
-            }]
-        },
-        options: options
-    });
-
-   
-
-    var lineGraphTime = new Chart(Linectx, {
-
-        type: "line",
-        data: {
-
-            labels: time,
-
-
-            datasets: [
-                {
-                    label: lineGraphLineED,
-                    borderColor: color1,
-                    fill: false,
-                    data: dataLineChartED
-
-                },
-
-                {
-                    label: lineGraphLineInp,
-                    borderColor: color2,
-                    fill: false,
-                    data: dataLineChartInp
-                },
-                {
-                    label: lineGraphLineAd,
-                    borderColor: color3,
-                    fill: false,
-                    data: dataLineChartAd
+let lineOptions = {
+    scales: {
+        x: [
+            {
+                id: 'x',
+                type: 'time',
+                display: true,
+            },
+            {
+                ticks: {
+                    time: {
+                        stepSize: 7,
+                        unit: 'week'
+                    }
                 }
-            ]
+            }
 
-        },
-        options: lineOptions
-    });
+
+        ],
+        yAxes: [
+            {
+                ticks: {
+                    stepSize: 150
+                }
+            }
+        ]
+    },
+
+    tooltipEvents: ["mousemove", "touchstart", "touchmove"],
+    pointDot: true,
+    pointDotRadius: 4,
+    layout: {
+        padding: 0,
+    },
+    responsive: true,
+    legend: {
+        display: true,
+        position: 'bottom',
+
+        Labels: {
+            fontColor: fontColor,
+            fontFamily: "'Arial','sans-serif', 'Helvetica'",
+            fontSize: 10,
+            generateLabels: true,
+        }
+    }
+};
+
+// med surg graph
+
+
+var medSurgGraph = new Chart(MSctx, {
+    type: "pie",
+    data: {
+        labels: pieChartLabels,
+        datasets: [{
+            label: "Medical Surgical Bed Capacity Daily Snapshot",
+            data: dataMSPie,
+            backgroundColor: [color1, color2, color3],
+
+        }]
+
+    },
+    options: options
+});
+
+
+var ICUGraph = new Chart(ICUctx, {
+
+    // ICU bed graph
+
+    type: "pie",
+    data: {
+        labels: pieChartLabels,
+        datasets: [{
+            label: "ICU Bed Capacity Daily Snapshot",
+            data: dataIcuPie,
+            backgroundColor: [color1, color2, color3],
+
+
+        }]
+    },
+    options: options
+});
+
+// ventilated patients graph
+var ventGraph = new Chart(Ventctx, {
+    type: "pie",
+    data: {
+        labels: pieChartLabels,
+        datasets: [{
+            label: "Ventilated Capacity Daily Snapshot",
+            backgroundColor: [color1, color2, color3],
+            data: dataVentPie,
+
+        }]
+    },
+    options: options
+});
+
+
+
+var lineGraphTime = new Chart(Linectx, {
+
+    type: "line",
+    data: {
+
+        labels: time,
+
+
+        datasets: [
+            {
+                label: lineGraphLineED,
+                borderColor: color1,
+                fill: false,
+                data: dataLineChartED
+
+            },
+
+            {
+                label: lineGraphLineInp,
+                borderColor: color2,
+                fill: false,
+                data: dataLineChartInp
+            },
+            {
+                label: lineGraphLineAd,
+                borderColor: color3,
+                fill: false,
+                data: dataLineChartAd
+            }
+        ]
+
+    },
+    options: lineOptions
+});
 
 }

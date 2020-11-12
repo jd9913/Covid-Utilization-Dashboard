@@ -17,7 +17,10 @@
     "url": "https://github.com/jd9913/Dashboard_Hospital/issues"
   },
   "homepage": "https://github.com/jd9913/Dashboard_Hospital#readme",
-  "dependencies": {},
+  "dependencies": {
+    "chart.js": "^2.9.4",
+    "chartjs-plugin-datalabels": "^0.7.0"
+  },
   "devDependencies": {
     "jest": "^26.4.2"
   }
