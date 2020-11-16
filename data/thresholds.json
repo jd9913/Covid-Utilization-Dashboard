@@ -1,0 +1,20 @@
+[
+    {
+       "tablename":"Hospital_Capacity Table",
+       "dataid":"1282",
+       "username":"jennifer.schlierman@maricopa.gov",
+       "positionname":"MCDEM EOC Technology",
+       "entrydate":"11/13/2020 12:35:54",
+       "subscribername":"",
+       "prevdataid":"0",
+       "effectiveDate":"11/12/2020",
+       "maxEDThreshold":"1000",
+       "minEDThreshold":"750",
+       "maxAdmitThreshold":"800",
+       "minAdmitThreshold":"160",
+       "maxInptThreshold":"287",
+       "minInptThreshold":"32",
+       "minDateThreshold":"9/20/2020",
+       "removeNull":"1"
+    }
+ ]

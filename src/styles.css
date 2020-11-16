@@ -24,6 +24,15 @@ body{
     font-weight: bold;
 }
 
+.threshold{
+    font-size: 1.25em;
+
+}
+
+.capacity{
+    font-size: 1em;
+}
+
 
 
 .chart {

@@ -9,6 +9,12 @@ const getData = () => {
     })
 }
 
+
+
+
+
+
+
 //global variables for linking to webEOC data
 
 let dataLineChartED = []; //array to hold daily data to generate line chart for ED patients 4/2020-current
@@ -19,13 +25,25 @@ let dataLineChartInp = []; //array to hold daily data to generate line chart for
 
 //number threshold levels so that the numbers can change colors based on their value
 
-let EDDataHighThreshold = 500; //threshold at which number changes color
-let EDDataLowThreshold = 150;
-let AdmitDataHighThreshold = 100;//threshold at which number changes color
-let AdmitDataLowThreshold = 50;
-let InptDataHighThreshold = 300;//threshold at which number changes color
-let InptDataLowThreshold = 100;
+let EDDataHighThreshold = ""; //threshold at which number changes color
+let EDDataLowThreshold = "";
+let AdmitDataHighThreshold = "";//threshold at which number changes color
+let AdmitDataLowThreshold = "";
+let InptDataHighThreshold = "";//threshold at which number changes color
+let InptDataLowThreshold = "";
+let dateFilter = "";
 
+const getThresholds = () => {
+    $.get("../data/thresholds.json", (thresholdData) => {
+
+        let thresholdDataClean = Object.values(thresholdData);
+
+        putThresholdData(thresholdDataClean);
+
+    })
+}
+
+getThresholds();
 
 
 //colors for the graphs
@@ -70,16 +88,58 @@ getCurrentDay();
 
 // populateAllVariables(allData)
 
-
-
-
-
 getData();
+
+
+
+
+
+function putThresholdData(thresholdData) {
+
+
+    EDDataHighThreshold = thresholdData.map((data) => {
+        return (data.maxEDThreshold);
+    });
+
+    $('#edMaxThreshold').text(EDDataHighThreshold);
+
+    dateFilter = thresholdData.map((data) => {
+        return (data.minDateThreshold);
+    })
+    $('#lineDateFilter').text(dateFilter);
+
+    EDDataLowThreshold = thresholdData.map((data) => {
+        return (data.minEDThreshold);
+    })
+    $('#edMinThreshold').text(EDDataLowThreshold);
+
+    AdmitDataHighThreshold = thresholdData.map((data) => {
+        return (data.maxAdmitThreshold);
+    });
+    $('#admitsMaxThreshold').text(AdmitDataHighThreshold);
+
+    AdmitDataLowThreshold = thresholdData.map((data) => {
+        return (data.minAdmitThreshold);
+    });
+    $('#admitsMinThreshold').text(AdmitDataLowThreshold);
+
+    InptDataHighThreshold = thresholdData.map((data) => {
+        return (data.maxInptThreshold);
+    });
+    $('#inptMaxThreshold').text(InptDataHighThreshold);
+
+    InptDataLowThreshold = thresholdData.map((data) => {
+        return (data.minInptThreshold);
+    });
+    $('#inptMinThreshold').text(InptDataLowThreshold);
+
+}
+
 
 
 function populateAllVariables(allData1) {
 
-    let dateFilter = '4/12/2020';
+
 
     let validDates = allData1.filter(function (data, i) {
 
@@ -87,7 +147,7 @@ function populateAllVariables(allData1) {
     })
 
 
-    // })
+
 
     let allData = validDates.sort(function (a, b) {
 
@@ -124,7 +184,10 @@ function populateAllVariables(allData1) {
 
     });
 
-    console.dir(lineGraphLabels);
+
+
+
+
 
     function popLastDate() {
 
@@ -141,6 +204,52 @@ function populateAllVariables(allData1) {
     };
 
     popLastDate();
+
+    //filter and reduce the arrays to pull the latest bed capacity numbers to match the date on the pie charts
+
+    let msCapacityAll = allData.map((data) => {
+        return [(data.medSurg_Capacity), (new Date(data.DataDate))];
+    })
+
+    function msCapacityNum() {
+        let max1 = msCapacityAll.reduce((a, b) => {
+
+            return a[1] > b[1] ? a : b;
+        });
+
+        return [max1[0]];
+    }
+let msCapacity=msCapacityNum();
+
+    $('#msCapacity').text(msCapacity);
+
+    let icuCapacityAll = allData.map((data) => {
+        return [(data.icuAdult_Capacity), (new Date(data.DataDate))];
+    })
+    function icuCapacityNum(){
+        let max1=icuCapacityAll.reduce((a, b)=>{
+            return a[1]>b[1]?a:b;
+        });
+        return[max1[0]]
+    }
+
+    let icuCapacity=icuCapacityNum();
+
+    $('#icuCapacity').text(icuCapacity);
+
+    let ventCapacityAll = allData.map((data) => {
+        return [(data.vent_Capacity), (new Date(data.DataDate))];
+    })
+
+    function ventCapacityNum(){
+        let max1=ventCapacityAll.reduce((a, b)=>{
+            return a[1]>b[1]?a:b;
+        });
+        return [max1[0]];
+    }
+let ventCapacity=ventCapacityNum();
+
+    $('#ventCapacity').text(ventCapacity);
 
 
     //filtering for medsurge data to populate pie charts
@@ -278,10 +387,12 @@ function populateAllVariables(allData1) {
     });
 
 
+
     let edSingle = allData.map((data) => {
         return [(data.edCovidPts), (new Date(data.DataDate))];
 
     });
+
 
     //reduces the object to the greatest DataDate(in UTC milliseconds) and returns only the value at index 0 which is value that is wanted
 
@@ -426,153 +537,153 @@ function populateAllVariables(allData1) {
             //     generateLabels: true,
             // }
         },
-       
+
         plugins: {
-            labels:{
-            showActualPercentages: true,
-            position: 'outside',
-            fontColor: fontColor
-            
+            labels: {
+                showActualPercentages: true,
+                position: 'outside',
+                fontColor: fontColor
+
             }
         }
-    
-};
 
-let lineOptions = {
-    scales: {
-        x: [
-            {
-                id: 'x',
-                type: 'time',
-                display: true,
-            },
-            {
-                ticks: {
-                    time: {
-                        stepSize: 7,
-                        unit: 'week'
+    };
+
+    let lineOptions = {
+        scales: {
+            x: [
+                {
+                    id: 'x',
+                    type: 'time',
+                    display: true,
+                },
+                {
+                    ticks: {
+                        time: {
+                            stepSize: 7,
+                            unit: 'week'
+                        }
                     }
                 }
-            }
 
 
-        ],
-        yAxes: [
-            {
-                ticks: {
-                    stepSize: 150
+            ],
+            yAxes: [
+                {
+                    ticks: {
+                        stepSize: 150
+                    }
                 }
+            ]
+        },
+
+        tooltipEvents: ["mousemove", "touchstart", "touchmove"],
+        pointDot: true,
+        pointDotRadius: 4,
+        layout: {
+            padding: 0,
+        },
+        responsive: true,
+        legend: {
+            display: true,
+            position: 'bottom',
+
+            Labels: {
+                fontColor: fontColor,
+                fontFamily: "'Arial','sans-serif', 'Helvetica'",
+                fontSize: 10,
+                generateLabels: true,
             }
-        ]
-    },
-
-    tooltipEvents: ["mousemove", "touchstart", "touchmove"],
-    pointDot: true,
-    pointDotRadius: 4,
-    layout: {
-        padding: 0,
-    },
-    responsive: true,
-    legend: {
-        display: true,
-        position: 'bottom',
-
-        Labels: {
-            fontColor: fontColor,
-            fontFamily: "'Arial','sans-serif', 'Helvetica'",
-            fontSize: 10,
-            generateLabels: true,
         }
-    }
-};
+    };
 
-// med surg graph
-
-
-var medSurgGraph = new Chart(MSctx, {
-    type: "pie",
-    data: {
-        labels: pieChartLabels,
-        datasets: [{
-            label: "Medical Surgical Bed Capacity Daily Snapshot",
-            data: dataMSPie,
-            backgroundColor: [color1, color2, color3],
-
-        }]
-
-    },
-    options: options
-});
+    // med surg graph
 
 
-var ICUGraph = new Chart(ICUctx, {
+    var medSurgGraph = new Chart(MSctx, {
+        type: "pie",
+        data: {
+            labels: pieChartLabels,
+            datasets: [{
+                label: "Medical Surgical Bed Capacity Daily Snapshot",
+                data: dataMSPie,
+                backgroundColor: [color1, color2, color3],
 
-    // ICU bed graph
+            }]
 
-    type: "pie",
-    data: {
-        labels: pieChartLabels,
-        datasets: [{
-            label: "ICU Bed Capacity Daily Snapshot",
-            data: dataIcuPie,
-            backgroundColor: [color1, color2, color3],
-
-
-        }]
-    },
-    options: options
-});
-
-// ventilated patients graph
-var ventGraph = new Chart(Ventctx, {
-    type: "pie",
-    data: {
-        labels: pieChartLabels,
-        datasets: [{
-            label: "Ventilated Capacity Daily Snapshot",
-            backgroundColor: [color1, color2, color3],
-            data: dataVentPie,
-
-        }]
-    },
-    options: options
-});
+        },
+        options: options
+    });
 
 
+    var ICUGraph = new Chart(ICUctx, {
 
-var lineGraphTime = new Chart(Linectx, {
+        // ICU bed graph
 
-    type: "line",
-    data: {
+        type: "pie",
+        data: {
+            labels: pieChartLabels,
+            datasets: [{
+                label: "ICU Bed Capacity Daily Snapshot",
+                data: dataIcuPie,
+                backgroundColor: [color1, color2, color3],
 
-        labels: time,
+
+            }]
+        },
+        options: options
+    });
+
+    // ventilated patients graph
+    var ventGraph = new Chart(Ventctx, {
+        type: "pie",
+        data: {
+            labels: pieChartLabels,
+            datasets: [{
+                label: "Ventilated Capacity Daily Snapshot",
+                backgroundColor: [color1, color2, color3],
+                data: dataVentPie,
+
+            }]
+        },
+        options: options
+    });
 
 
-        datasets: [
-            {
-                label: lineGraphLineED,
-                borderColor: color1,
-                fill: false,
-                data: dataLineChartED
 
-            },
+    var lineGraphTime = new Chart(Linectx, {
 
-            {
-                label: lineGraphLineInp,
-                borderColor: color2,
-                fill: false,
-                data: dataLineChartInp
-            },
-            {
-                label: lineGraphLineAd,
-                borderColor: color3,
-                fill: false,
-                data: dataLineChartAd
-            }
-        ]
+        type: "line",
+        data: {
 
-    },
-    options: lineOptions
-});
+            labels: time,
+
+
+            datasets: [
+                {
+                    label: lineGraphLineED,
+                    borderColor: color1,
+                    fill: false,
+                    data: dataLineChartED
+
+                },
+
+                {
+                    label: lineGraphLineInp,
+                    borderColor: color2,
+                    fill: false,
+                    data: dataLineChartInp
+                },
+                {
+                    label: lineGraphLineAd,
+                    borderColor: color3,
+                    fill: false,
+                    data: dataLineChartAd
+                }
+            ]
+
+        },
+        options: lineOptions
+    });
 
 }

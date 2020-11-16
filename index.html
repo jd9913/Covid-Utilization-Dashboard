@@ -47,7 +47,8 @@
                     </div>
                     <div class="panel-footer">
                         <h4>COVID Positive Patients Seen in ED</h4>
-                        <p class="threshold"><span id='edThreshold'></span></p>
+                        <p class="threshold text-left">Max threshold: <span id='edMaxThreshold'class="threshold"></span></p>
+                        <p class="threshold text-left">Min threshold: <span id='edMinThreshold'class="threshold"></span></p>
                     </div>
                 </div>
 
@@ -63,7 +64,8 @@
                     </div>
                     <div class="panel-footer">
                         <h4>COVID Positive Admissions</h4>
-                        <p class="threshold"><span id='adThreshold'></span></p>
+                        <p class="threshold text-left">Max threshold: <span id='admitsMaxThreshold'class="threshold"></span></p>
+                        <p class="threshold text-left">Min threshold: <span id='admitsMinThreshold'class="threshold"></span></p>
                     </div>
                 </div>
 
@@ -79,10 +81,12 @@
                     </div>
                     <div class="panel-footer">
                         <h4>COVID Positive Inpatients</h4>
-                        <p class="threshold"><span id='inptThreshold'></span></p>
+                        <p class="threshold text-left">Max threshold: <span id='inptMaxThreshold'class="threshold"></span></p>
+                        <p class="threshold text-left">Min threshold: <span id='inptMinThreshold'class="threshold"></span></p>
                     </div>
                 </div>
-
+                <div class="col-sm-12 text-center">color of numbers is determined by set thresholds.  All threshold numbers can be changed here</div>
+            </br>
                 <div class="col-sm-4 text-center">
                     <div class="panel panel-default">
                         <h3 class="panel-title">Medical Surgical Beds</h3>
@@ -101,7 +105,7 @@
                         <canvas id="medSurgBeds" class="chart"></canvas>
                     </div>
                     <div class="panel-footer">
-                        <span id="msCapacity"></span>
+                       <p class="capacity text-left">Med/Surg Bed Capacity: <span id="msCapacity"class="capacity"></span></p>
                     </div>
                 </div>
 
@@ -123,7 +127,7 @@
                         <canvas id="IcuBeds" class="chart"></canvas>
                     </div>
                     <div class="panel-footer">
-                        <span id="icuCapacity"></span>
+                        <p class="capacity text-left">ICU Bed Capacity:  <span id="icuCapacity"class="capacity"></span></p>
                     </div>
                 </div>
 
@@ -144,7 +148,7 @@
                         <canvas id="vents" class="chart"></canvas>
                     </div>
                     <div class="panel-footer">
-                        <span id="ventCapacity"></span>
+                        <p class="capacity text-left">Vent Bed Capacity: <span id="ventCapacity" class="capacity"></span></p>
                     </div>
                 </div>
             </div>
@@ -164,6 +168,8 @@
                     </div>
                     <div class="panel-footer">
                         <h4>COVID Positive Patients Line Chart</h4>
+                        <p class="threshold text-left">Line graph data is shown filtered from date: <span class="threshold" id='lineDateFilter'></span></p>
+                        
                     </div>
                 </div>
 
@@ -171,6 +177,9 @@
         </div>
 
     </article>
+  
+   
+    
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
