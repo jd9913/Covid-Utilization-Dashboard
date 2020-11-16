@@ -92,8 +92,6 @@ getData();
 
 
 
-
-
 function putThresholdData(thresholdData) {
 
 

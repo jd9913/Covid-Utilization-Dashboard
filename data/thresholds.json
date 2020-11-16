@@ -14,7 +14,7 @@
        "minAdmitThreshold":"160",
        "maxInptThreshold":"287",
        "minInptThreshold":"32",
-       "minDateThreshold":"9/20/2020",
+       "minDateThreshold":"5/1/2020",
        "removeNull":"1"
     }
  ]

@@ -1,27 +1,18 @@
 
-//THIS FILE IS FOR TRANSFER TO WEBEOC
+
+const getData = () => {
+    $.get("../data/hospital.json", (hospitalData) => {
+
+        let hospitalDataClean = Object.values(hospitalData);
+
+        populateAllVariables(hospitalDataClean);
+    })
+}
 
 
-        const baseURL = "https://webeoc.maricopa.gov/eoc7/api/rest.svc";
-        const boardURL = "/board/HCCapacity/display/dashboardData";
-              
-          function getData() {
-       
-            var data = new XMLHttpRequest();
-            data.open('GET', baseURL + boardURL, false);
-        
-            data.onload = function () {
-        
-                if (this.status == 200) {
-        
-                    let allData = JSON.parse(this.responseText);
-        
-                    populateAllVariables(allData);
-                }
-            }
-        
-            data.send();
-        };
+
+
+
 
 
 //global variables for linking to webEOC data
@@ -30,7 +21,7 @@ let dataLineChartED = []; //array to hold daily data to generate line chart for 
 let dataLineChartAd = []; //array to hold daily data to generate line chart for Admit 4/2020-current
 let dataLineChartInp = []; //array to hold daily data to generate line chart for Inpatients 4/2020-current
 
-let dateFilter = '4/12/2020';  //date after which data is rendered.
+
 
 //number threshold levels so that the numbers can change colors based on their value
 
@@ -40,7 +31,19 @@ let AdmitDataHighThreshold = "";//threshold at which number changes color
 let AdmitDataLowThreshold = "";
 let InptDataHighThreshold = "";//threshold at which number changes color
 let InptDataLowThreshold = "";
+let dateFilter = "4/12/2020";
 
+const getThresholds = () => {
+    $.get("../data/thresholds.json", (thresholdData) => {
+
+        let thresholdDataClean = Object.values(thresholdData);
+
+        putThresholdData(thresholdDataClean);
+
+    })
+}
+
+// getThresholds();
 
 
 //colors for the graphs
@@ -75,7 +78,7 @@ function getCurrentDay() {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     let currentDay = event.toLocaleDateString(undefined, options);
 
-    $('#currentDay').text(currentDay);
+    $('#currentDay').text("Today's Date: " + currentDay);
 }
 
 
@@ -83,21 +86,67 @@ function getCurrentDay() {
 
 getCurrentDay();
 
-//grab the data from a board
+// populateAllVariables(allData)
+
 getData();
+
+
+
+// function putThresholdData(thresholdData) {
+
+
+//     EDDataHighThreshold = thresholdData.map((data) => {
+//         return (data.maxEDThreshold);
+//     });
+
+//     $('#edMaxThreshold').text(EDDataHighThreshold);
+
+//     dateFilter = thresholdData.map((data) => {
+//         return (data.minDateThreshold);
+//     })
+//     $('#lineDateFilter').text(dateFilter);
+
+//     EDDataLowThreshold = thresholdData.map((data) => {
+//         return (data.minEDThreshold);
+//     })
+//     $('#edMinThreshold').text(EDDataLowThreshold);
+
+//     AdmitDataHighThreshold = thresholdData.map((data) => {
+//         return (data.maxAdmitThreshold);
+//     });
+//     $('#admitsMaxThreshold').text(AdmitDataHighThreshold);
+
+//     AdmitDataLowThreshold = thresholdData.map((data) => {
+//         return (data.minAdmitThreshold);
+//     });
+//     $('#admitsMinThreshold').text(AdmitDataLowThreshold);
+
+//     InptDataHighThreshold = thresholdData.map((data) => {
+//         return (data.maxInptThreshold);
+//     });
+//     $('#inptMaxThreshold').text(InptDataHighThreshold);
+
+//     InptDataLowThreshold = thresholdData.map((data) => {
+//         return (data.minInptThreshold);
+//     });
+//     $('#inptMinThreshold').text(InptDataLowThreshold);
+
+// }
+
 
 
 function populateAllVariables(allData1) {
 
-    
 
-    let validDates = allData1.filter(function (data, i) {
 
+    let validDates = allData1.filter(function (data) {
+        
         return new Date(dateFilter) <= new Date(data.DataDate);
     })
 
+   
+    console.log(validDates)
 
-    // })
 
     let allData = validDates.sort(function (a, b) {
 
@@ -106,6 +155,8 @@ function populateAllVariables(allData1) {
 
         return (date1 - date2);//sort string ascending   
     })
+
+
 
 
     dataLineChartED = allData.map((data) => {
@@ -134,8 +185,73 @@ function populateAllVariables(allData1) {
 
     });
 
-  
+
+
+    function popLastDate() {
+
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+
+        const lastDate1 = lineGraphLabels.slice(-1);
+        const D = new Date(lastDate1);
+
+        const lastDate = ((D.getMonth() + 1) + "/" + D.getDate() + "/" + D.getFullYear());
+
+
+        $('#lastDataDate').text("DATA SNAPSHOT AS OF: " + lastDate);
+
+    };
     
+
+    popLastDate();
+
+    //filter and reduce the arrays to pull the latest bed capacity numbers to match the date on the pie charts
+
+    let msCapacityAll = allData.map((data) => {
+        return [(data.medSurg_Capacity), (new Date(data.DataDate))];
+    })
+   
+    console.log(allData)
+
+    function msCapacityNum() {
+        let max1 = msCapacityAll.reduce((a, b) => {
+
+            return a[1] > b[1] ? a : b;
+        });
+
+        return [max1[0]];
+    }
+let msCapacity=msCapacityNum();
+
+    $('#msCapacity').text(msCapacity);
+
+    let icuCapacityAll = allData.map((data) => {
+        return [(data.icuAdult_Capacity), (new Date(data.DataDate))];
+    })
+    function icuCapacityNum(){
+        let max1=icuCapacityAll.reduce((a, b)=>{
+            return a[1]>b[1]?a:b;
+        });
+        return[max1[0]]
+    }
+
+    let icuCapacity=icuCapacityNum();
+
+    $('#icuCapacity').text(icuCapacity);
+
+    let ventCapacityAll = allData.map((data) => {
+        return [(data.vent_Capacity), (new Date(data.DataDate))];
+    })
+
+    function ventCapacityNum(){
+        let max1=ventCapacityAll.reduce((a, b)=>{
+            return a[1]>b[1]?a:b;
+        });
+        return [max1[0]];
+    }
+let ventCapacity=ventCapacityNum();
+
+    $('#ventCapacity').text(ventCapacity);
+
 
     //filtering for medsurge data to populate pie charts
     let medsurgDataAvail = allData.map((data) => {
@@ -148,12 +264,11 @@ function populateAllVariables(allData1) {
     function medsurgPieAvail() {
         let max1 = medsurgDataAvail.reduce((a, b) => {
 
-           
+
 
             return a[1] > b[1] ? a : b;
         });
 
-       
 
         return [max1[0]];
     }
@@ -273,10 +388,12 @@ function populateAllVariables(allData1) {
     });
 
 
+
     let edSingle = allData.map((data) => {
         return [(data.edCovidPts), (new Date(data.DataDate))];
 
     });
+
 
     //reduces the object to the greatest DataDate(in UTC milliseconds) and returns only the value at index 0 which is value that is wanted
 
@@ -291,10 +408,10 @@ function populateAllVariables(allData1) {
 
     function adMax() {
         let max1 = adSingle.reduce((a, b) => {
-            
+
             return a[1] > b[1] ? a : b;
         });
-       
+
         return parseInt(max1[0]) //function being reduced has 2 key/value pairs in each object.  reducing to max in value index 1 then returning value index 0;
 
     }
@@ -379,6 +496,18 @@ function populateAllVariables(allData1) {
     getInptNumber();
 
 
+    //Get capacity numbers for pie charts
+
+    //Capacity for MS Beds
+
+    //Capacity for ICU Beds
+
+    //Capacity for Vents
+
+
+
+
+
     //4 graph data references
     var MSctx = medSurgGraphEl;
     var ICUctx = icuGraphEl;
@@ -390,36 +519,64 @@ function populateAllVariables(allData1) {
     // Global + Custom Chart Config Options
 
     let options = {
-        // bezierCurve: true,
-        // animation: true,
-        // animationEasing: "easeOutQuart",
-        // showScale: true,
-        // tooltipEvents: ["mousemove", "touchstart", "touchmove"],
-        // tooltipCornerRadius: 3,
-        // pointDot: true,
-        // pointDotRadius: 4,
-        // datasets:
-        //     { fill: false, },
-        // scaleShowLine: true,
-        // animationEasing: "easeOutBounce",
-        // animateRotate: true,
-        // animateScale: true,
-        // responsive: true,
-        // legend: {
-        //     display: true,
-        //     position: 'bottom',
-        //     Labels: {
-        //         fontColor: fontColor,
-        //         fontFamily: "'Arial','sans-serif', 'Helvetica'",
-        //         fontSize: 10,
-        //        generateLabels: true,
 
-        //     }
-        // }
+        tooltipEvents: ["mousemove", "touchstart", "touchmove"],
+        pointDot: true,
+        pointDotRadius: 4,
+        layout: {
+            padding: 0,
+        },
+        responsive: true,
+        legend: {
+            display: true,
+            position: 'bottom',
+
+            // Labels: {
+            //     fontColor: fontColor,
+            //     fontFamily: "'Arial','sans-serif', 'Helvetica'",
+            //     fontSize: 10,
+            //     generateLabels: true,
+            // }
+        },
+
+        plugins: {
+            labels: {
+                showActualPercentages: true,
+                position: 'outside',
+                fontColor: fontColor
+
+            }
+        }
 
     };
 
     let lineOptions = {
+        scales: {
+            x: [
+                {
+                    id: 'x',
+                    type: 'time',
+                    display: true,
+                },
+                {
+                    ticks: {
+                        time: {
+                            stepSize: 7,
+                            unit: 'week'
+                        }
+                    }
+                }
+
+
+            ],
+            yAxes: [
+                {
+                    ticks: {
+                        stepSize: 150
+                    }
+                }
+            ]
+        },
 
         tooltipEvents: ["mousemove", "touchstart", "touchmove"],
         pointDot: true,
@@ -456,7 +613,7 @@ function populateAllVariables(allData1) {
             }]
 
         },
-        options: lineOptions
+        options: options
     });
 
 
@@ -475,7 +632,7 @@ function populateAllVariables(allData1) {
 
             }]
         },
-        options: lineOptions
+        options: options
     });
 
     // ventilated patients graph
@@ -490,10 +647,10 @@ function populateAllVariables(allData1) {
 
             }]
         },
-        options: lineOptions
+        options: options
     });
 
-   
+
 
     var lineGraphTime = new Chart(Linectx, {
 
