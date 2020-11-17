@@ -134,7 +134,6 @@ function putThresholdData(thresholdData) {
 }
 
 
-
 function populateAllVariables(allData1) {
 
 
@@ -143,8 +142,6 @@ function populateAllVariables(allData1) {
 
         return new Date(dateFilter) <= new Date(data.DataDate);
     })
-
-
 
 
     let allData = validDates.sort(function (a, b) {
