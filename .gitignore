@@ -20,4 +20,6 @@ data_Aug18-Aug24/EMResource Bed Poll workbook.csv
 node_modules
 *.xlsx
 *.csv
+hospital.json
+thresholds.json
 >>>>>>> initialFiles
