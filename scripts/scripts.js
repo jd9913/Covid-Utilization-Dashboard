@@ -25,25 +25,34 @@ let dataLineChartInp = []; //array to hold daily data to generate line chart for
 
 //number threshold levels so that the numbers can change colors based on their value
 
-let EDDataHighThreshold = ""; //threshold at which number changes color
-let EDDataLowThreshold = "";
-let AdmitDataHighThreshold = "";//threshold at which number changes color
-let AdmitDataLowThreshold = "";
-let InptDataHighThreshold = "";//threshold at which number changes color
-let InptDataLowThreshold = "";
+let EDDataHighThreshold = "1000"; //threshold at which number changes color
+let EDDataLowThreshold = "100";
+let AdmitDataHighThreshold = "1000";//threshold at which number changes color
+let AdmitDataLowThreshold = "100";
+let InptDataHighThreshold = "1000";//threshold at which number changes color
+let InptDataLowThreshold = "100";
 let dateFilter = "4/12/2020";
 
-const getThresholds = () => {
-    $.get("../data/thresholds.json", (thresholdData) => {
+$('#edMaxThreshold').text(EDDataHighThreshold);
+$('#inptMinThreshold').text(InptDataLowThreshold);
+ $('#edMinThreshold').text(EDDataLowThreshold);
+$('#admitsMaxThreshold').text(AdmitDataHighThreshold);
+$('#admitsMinThreshold').text(AdmitDataLowThreshold);
+ $('#inptMaxThreshold').text(InptDataHighThreshold);
+ $('#lineDateFilter').text(dateFilter);
 
-        let thresholdDataClean = Object.values(thresholdData);
 
-        putThresholdData(thresholdDataClean);
+// const getThresholds = () => {
+//     $.get("../data/thresholds.json", (thresholdData) => {
 
-    })
-}
+//         let thresholdDataClean = Object.values(thresholdData);
 
-// getThresholds();
+//         putThresholdData(thresholdDataClean);
+
+//     })
+// }
+
+//  getThresholds();
 
 
 //colors for the graphs
@@ -136,7 +145,6 @@ getData();
 
 
 function populateAllVariables(allData1) {
-
 
 
     let validDates = allData1.filter(function (data) {
