@@ -57,10 +57,11 @@ $('#admitsMinThreshold').text(AdmitDataLowThreshold);
 
 //colors for the graphs
 
-const color1 = '#FF00FF';
-const color2 = '#00FACC';
-const color3 = '#FFCC00';
-const fontColor = '#504F4F';
+const color1 = '#ff6e54';
+const color2 = '#444e86';
+const color3 = '#dd5182';
+const color4='#955196'
+const fontColor = '#003f5c';
 
 
 
@@ -101,46 +102,46 @@ getData();
 
 
 
-// function putThresholdData(thresholdData) {
+function putThresholdData(thresholdData) {
 
 
-//     EDDataHighThreshold = thresholdData.map((data) => {
-//         return (data.maxEDThreshold);
-//     });
+    EDDataHighThreshold = thresholdData.map((data) => {
+        return (data.maxEDThreshold);
+    });
 
-//     $('#edMaxThreshold').text(EDDataHighThreshold);
+    $('#edMaxThreshold').text(EDDataHighThreshold);
 
-//     dateFilter = thresholdData.map((data) => {
-//         return (data.minDateThreshold);
-//     })
-//     $('#lineDateFilter').text(dateFilter);
+    dateFilter = thresholdData.map((data) => {
+        return (data.minDateThreshold);
+    })
+    $('#lineDateFilter').text(dateFilter);
 
-//     EDDataLowThreshold = thresholdData.map((data) => {
-//         return (data.minEDThreshold);
-//     })
-//     $('#edMinThreshold').text(EDDataLowThreshold);
+    EDDataLowThreshold = thresholdData.map((data) => {
+        return (data.minEDThreshold);
+    })
+    $('#edMinThreshold').text(EDDataLowThreshold);
 
-//     AdmitDataHighThreshold = thresholdData.map((data) => {
-//         return (data.maxAdmitThreshold);
-//     });
-//     $('#admitsMaxThreshold').text(AdmitDataHighThreshold);
+    AdmitDataHighThreshold = thresholdData.map((data) => {
+        return (data.maxAdmitThreshold);
+    });
+    $('#admitsMaxThreshold').text(AdmitDataHighThreshold);
 
-//     AdmitDataLowThreshold = thresholdData.map((data) => {
-//         return (data.minAdmitThreshold);
-//     });
-//     $('#admitsMinThreshold').text(AdmitDataLowThreshold);
+    AdmitDataLowThreshold = thresholdData.map((data) => {
+        return (data.minAdmitThreshold);
+    });
+    $('#admitsMinThreshold').text(AdmitDataLowThreshold);
 
-//     InptDataHighThreshold = thresholdData.map((data) => {
-//         return (data.maxInptThreshold);
-//     });
-//     $('#inptMaxThreshold').text(InptDataHighThreshold);
+    InptDataHighThreshold = thresholdData.map((data) => {
+        return (data.maxInptThreshold);
+    });
+    $('#inptMaxThreshold').text(InptDataHighThreshold);
 
-//     InptDataLowThreshold = thresholdData.map((data) => {
-//         return (data.minInptThreshold);
-//     });
-//     $('#inptMinThreshold').text(InptDataLowThreshold);
+    InptDataLowThreshold = thresholdData.map((data) => {
+        return (data.minInptThreshold);
+    });
+    $('#inptMinThreshold').text(InptDataLowThreshold);
 
-// }
+}
 
 
 
@@ -504,18 +505,6 @@ let ventCapacity=ventCapacityNum();
     getInptNumber();
 
 
-    //Get capacity numbers for pie charts
-
-    //Capacity for MS Beds
-
-    //Capacity for ICU Beds
-
-    //Capacity for Vents
-
-
-
-
-
     //4 graph data references
     var MSctx = medSurgGraphEl;
     var ICUctx = icuGraphEl;
@@ -580,7 +569,8 @@ let ventCapacity=ventCapacityNum();
             yAxes: [
                 {
                     ticks: {
-                        stepSize: 150
+                        stepSize: 150,
+                        beginAtZero: true
                     }
                 }
             ]
