@@ -23,3 +23,5 @@ node_modules
 hospital.json
 thresholds.json
 >>>>>>> initialFiles
+data/hospital.json
+.vs/Dashboard_Hospital/v16/.suo

@@ -1,5 +1,4 @@
 
-
 const getData = () => {
     $.get("../data/hospital.json", (hospitalData) => {
 
@@ -7,51 +6,23 @@ const getData = () => {
 
         populateAllVariables(hospitalDataClean);
     })
-}
+};
 
 
 
 
-//global variables for linking to webEOC data
 
 let dataLineChartED = []; //array to hold daily data to generate line chart for ED patients 4/2020-current
 let dataLineChartAd = []; //array to hold daily data to generate line chart for Admit 4/2020-current
 let dataLineChartInp = []; //array to hold daily data to generate line chart for Inpatients 4/2020-current
 
 
-
-//number threshold levels so that the numbers can change colors based on their value
-
-let EDDataHighThreshold = "1000"; //threshold at which number changes color
-let EDDataLowThreshold = "100";
-let AdmitDataHighThreshold = "1000";//threshold at which number changes color
-let AdmitDataLowThreshold = "100";
-let InptDataHighThreshold = "1000";//threshold at which number changes color
-let InptDataLowThreshold = "100";
 let dateFilter = "4/12/2020";
 
-$('#edMaxThreshold').text(EDDataHighThreshold);
-$('#inptMinThreshold').text(InptDataLowThreshold);
- $('#edMinThreshold').text(EDDataLowThreshold);
-$('#admitsMaxThreshold').text(AdmitDataHighThreshold);
-$('#admitsMinThreshold').text(AdmitDataLowThreshold);
- $('#inptMaxThreshold').text(InptDataHighThreshold);
  $('#lineDateFilter').text(dateFilter);
-
-
-// const getThresholds = () => {
-//     $.get("../data/thresholds.json", (thresholdData) => {
-
-//         let thresholdDataClean = Object.values(thresholdData);
-
-//         putThresholdData(thresholdDataClean);
-
-//     })
-// }
-
-//  getThresholds();
-
-
+        
+      
+      
 //colors for the graphs
 
 const color1 = '#ff6e54';
@@ -85,7 +56,7 @@ function getCurrentDay() {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     let currentDay = event.toLocaleDateString(undefined, options);
 
-    $('#currentDay').text("Today's Date: " + currentDay);
+    $('#currentDay').text("Today's Date: "+currentDay);
 }
 
 
@@ -93,65 +64,21 @@ function getCurrentDay() {
 
 getCurrentDay();
 
-// populateAllVariables(allData)
-
 getData();
 
-
-
-function putThresholdData(thresholdData) {
-
-
-    EDDataHighThreshold = thresholdData.map((data) => {
-        return (data.maxEDThreshold);
-    });
-
-    $('#edMaxThreshold').text(EDDataHighThreshold);
-
-    dateFilter = thresholdData.map((data) => {
-        return (data.minDateThreshold);
-    })
-    $('#lineDateFilter').text(dateFilter);
-
-    EDDataLowThreshold = thresholdData.map((data) => {
-        return (data.minEDThreshold);
-    })
-    $('#edMinThreshold').text(EDDataLowThreshold);
-
-    AdmitDataHighThreshold = thresholdData.map((data) => {
-        return (data.maxAdmitThreshold);
-    });
-    $('#admitsMaxThreshold').text(AdmitDataHighThreshold);
-
-    AdmitDataLowThreshold = thresholdData.map((data) => {
-        return (data.minAdmitThreshold);
-    });
-    $('#admitsMinThreshold').text(AdmitDataLowThreshold);
-
-    InptDataHighThreshold = thresholdData.map((data) => {
-        return (data.maxInptThreshold);
-    });
-    $('#inptMaxThreshold').text(InptDataHighThreshold);
-
-    InptDataLowThreshold = thresholdData.map((data) => {
-        return (data.minInptThreshold);
-    });
-    $('#inptMinThreshold').text(InptDataLowThreshold);
-
-}
-
-
+        
+        
 
 function populateAllVariables(allData1) {
 
-    console.log(allData1)
 
     let validDates = allData1.filter(function (data) {
         
         return new Date(dateFilter) <= new Date(data.DataDate);
     })
 
-       console.log(validDates)
+   
+  
 
 
     let allData = validDates.sort(function (a, b) {
@@ -161,8 +88,6 @@ function populateAllVariables(allData1) {
 
         return (date1 - date2);//sort string ascending   
     })
-
-
 
 
     dataLineChartED = allData.map((data) => {
@@ -446,52 +371,20 @@ let ventCapacity=ventCapacityNum();
 
         //referencing the block for the numbers at the top
         $('#covidEDNumber').text(dataEDNumber);
-
-        $('#covidEDNumber').removeClass();
-
-        if (dataEDNumber > EDDataHighThreshold) {
-            document.getElementById('covidEDNumber').className += "highClass";
-        } else if (dataEDNumber > EDDataLowThreshold) {
-            document.getElementById('covidEDNumber').className += "medClass";
-        } else {
-
-            document.getElementById('covidEDNumber').className += "lowClass";
-        }
+         
     };
-
 
     function getAdmitNumber() {
         //referencing the block for the numbers at the top
         $('#covidAdmitNumber').text(dataAdNumber);
-
-        $('#covidAdmitNumber').removeClass();
-
-        if (dataAdNumber > AdmitDataHighThreshold) {
-            document.getElementById('covidAdmitNumber').className += "highClass";
-        } else if (dataAdNumber > AdmitDataLowThreshold) {
-            document.getElementById('covidAdmitNumber').className += "medClass";
-        } else {
-
-            document.getElementById('covidAdmitNumber').className += "lowClass";
-        }
+           
     };
 
 
     function getInptNumber() {
         //referencing the block for the numbers at the top
         $('#covidInptNumber').text(dataInptNumber)
-
-        $('#covidInptNumber').removeClass();
-
-        if (dataInptNumber > InptDataHighThreshold) {
-            document.getElementById('covidInptNumber').className += "highClass";
-        } else if (dataInptNumber > InptDataLowThreshold) {
-            document.getElementById('covidInptNumber').className += "medClass";
-        } else {
-
-            document.getElementById('covidInptNumber').className += "lowClass";
-        }
-    }
+   }
 
 
 
@@ -500,6 +393,7 @@ let ventCapacity=ventCapacityNum();
     getEDNumber();
     getAdmitNumber();
     getInptNumber();
+
 
 
     //4 graph data references
@@ -567,7 +461,7 @@ let ventCapacity=ventCapacityNum();
                 {
                     ticks: {
                         stepSize: 150,
-                        beginAtZero: true
+                      beginAtZero: true
                     }
                 }
             ]
