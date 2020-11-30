@@ -132,7 +132,6 @@ function populateAllVariables(allData1) {
 
     };
     
-
     popLastDate();
 
     //filter and reduce the arrays to pull the latest bed capacity numbers to match the date on the pie charts
@@ -141,7 +140,7 @@ function populateAllVariables(allData1) {
         return [(data.medSurg_Capacity), (new Date(data.DataDate))];
     })
    
-    console.log(allData)
+    
 
     function msCapacityNum() {
         let max1 = msCapacityAll.reduce((a, b) => {
