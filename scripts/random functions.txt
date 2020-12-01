@@ -1,0 +1,158 @@
+function putThresholdData(thresholdData) {
+
+
+    EDDataHighThreshold = thresholdData.map((data) => {
+        return (data.maxEDThreshold);
+    });
+
+    
+
+    dateFilter = thresholdData.map((data) => {
+        return new Date(data.minDateThreshold);
+    })
+    
+    console.log(dateFilter)
+    
+  
+    EDDataLowThreshold = thresholdData.map((data) => {
+        return Number(data.minEDThreshold);
+    })
+   
+
+    AdmitDataHighThreshold = thresholdData.map((data) => {
+        return Number(data.maxAdmitThreshold);
+    });
+    
+
+    AdmitDataLowThreshold = thresholdData.map((data) => {
+        return Number(data.minAdmitThreshold);
+    });
+    
+
+    InptDataHighThreshold = thresholdData.map((data) => {
+        return Number(data.maxInptThreshold);
+    });
+   
+
+    InptDataLowThreshold = thresholdData.map((data) => {
+        return Number(data.minInptThreshold);
+    });
+    
+
+}
+
+
+
+     // $('#covidEDNumber').removeClass();
+
+        // if (dataEDNumber > EDDataHighThreshold) {
+        //     document.getElementById('covidEDNumber').className += "highClass";
+        // } else if (dataEDNumber > EDDataLowThreshold) {
+        //     document.getElementById('covidEDNumber').className += "medClass";
+            
+        // } else {
+
+        //     document.getElementById('covidEDNumber').className += "lowClass";
+        // }
+  
+
+
+
+  // if (dataAdNumber > AdmitDataHighThreshold) {
+        //     document.getElementById('covidAdmitNumber').className += "highClass";
+        // } else if (dataAdNumber > AdmitDataLowThreshold) {
+        //     document.getElementById('covidAdmitNumber').className += "medClass";
+        // } else {
+
+        //     document.getElementById('covidAdmitNumber').className += "lowClass";
+        // }
+
+
+
+            // $('#covidInptNumber').removeClass();
+
+        // if (dataInptNumber > InptDataHighThreshold) {
+        //     document.getElementById('covidInptNumber').className += "highClass";
+        // } else if (dataInptNumber > InptDataLowThreshold) {
+        //     document.getElementById('covidInptNumber').className += "medClass";
+        // } else {
+
+        //     document.getElementById('covidInptNumber').className += "lowClass";
+        // }
+
+
+
+    <!--  <p class="threshold text-left">Max threshold: <span class="threshold" id="inptMaxThreshold"/>
+                   </p>
+                   <p class="threshold text-left">Min threshold: <span class="threshold" id="inptMinThreshold"/>
+                   </p>-->
+
+
+
+                         <!-- <p class="threshold text-left">Max threshold: <span class="threshold" id="admitsMaxThreshold"/>
+                   </p>
+                   <p class="threshold text-left">Min threshold: <span class="threshold" id="admitsMinThreshold"/>
+                   </p>-->
+
+
+
+                        <!--<p class="threshold text-left">Max threshold: <span class="threshold" id="edMaxThreshold"/>
+                   </p>
+                   <p class="threshold text-left">Min threshold: <span class="threshold" id="edMinThreshold"/>
+                   </p>-->
+
+
+
+// const getThresholds = () => {
+//     $.get("../data/thresholds.json", (thresholdData) => {
+
+//         let thresholdDataClean = Object.values(thresholdData);
+
+//         putThresholdData(thresholdDataClean);
+
+//     })
+// }
+
+// getThresholds();
+
+
+
+//number threshold levels so that the numbers can change colors based on their value
+
+// let EDDataHighThreshold = "1000"; //threshold at which number changes color
+// let EDDataLowThreshold = "100";
+// let AdmitDataHighThreshold = "1000";//threshold at which number changes color
+// let AdmitDataLowThreshold = "100";
+// let InptDataHighThreshold = "1000";//threshold at which number changes color
+// let InptDataLowThreshold = "100";
+
+
+
+// $('#edMaxThreshold').text(EDDataHighThreshold);
+// $('#inptMinThreshold').text(InptDataLowThreshold);
+//  $('#edMinThreshold').text(EDDataLowThreshold);
+// $('#admitsMaxThreshold').text(AdmitDataHighThreshold);
+// $('#admitsMinThreshold').text(AdmitDataLowThreshold);
+//  $('#inptMaxThreshold').text(InptDataHighThreshold);
+
+.highClass {
+    color: red;
+    font-size: 5rem;
+    font-weight: bold;
+}
+.medClass {
+    color: orange;
+    font-size: 5rem;
+    font-weight: bold;
+}
+.lowClass {
+    color: green;
+    font-size: 5rem;
+    font-weight: bold;
+}
+
+
+
+
+
+

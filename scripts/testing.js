@@ -12,9 +12,6 @@ const getData = () => {
 
 
 
-
-
-
 //global variables for linking to webEOC data
 
 let dataLineChartED = []; //array to hold daily data to generate line chart for ED patients 4/2020-current

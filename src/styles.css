@@ -1,7 +1,15 @@
-﻿*{
-    font-size: 62.5%;
+﻿:root{
+     --color1:#ff6e54; /*ED color */
+    --color2:#444e86; /*inpatients */
+    --color3:#dd5182; /*Admit color */
+    --color4: #955196; /*extra--not used */
+    --fontColor:#003f5c; /* font color */
 }
 
+
+*{
+    font-size: 62.5%;
+}
 
 body{
     font-size: 10rem;
@@ -25,15 +33,25 @@ body{
 }
 
 .threshold{
-    font-size: 1.25em;
+    font-size: 1em;
+    font-style: italic;
 
 }
 
 .capacity{
-    font-size: 1em;
+    font-size: .75em;
+    text-align: left;
+    
 }
+.notes{
+    font-size: .5em;
+    font-style: italic;
+    font-weight: lighter;
+}
+.capacityNumber{
+    font-size: 1em;
 
-
+}
 
 .chart {
     vertical-align: middle;
@@ -55,7 +73,7 @@ body{
     height: 100%;
 }
 
-panel-footer{
+.panel-footer{
     font-size: 2rem;
 }
 
@@ -75,18 +93,24 @@ panel-footer{
 }
 
 
-.highClass {
-    color: red;
+
+#covidEDNumber{
+    color:var(--color1);
     font-size: 5rem;
     font-weight: bold;
+
 }
-.medClass {
-    color: orange;
+#covidAdmitNumber{
+    color: var(--color3);
     font-size: 5rem;
     font-weight: bold;
+
 }
-.lowClass {
-    color: green;
+
+#covidInptNumber{
+
+    color: var(--color2);
     font-size: 5rem;
     font-weight: bold;
+
 }

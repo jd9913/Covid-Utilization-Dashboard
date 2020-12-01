@@ -21,161 +21,144 @@
 
 <body>
     <header class="jumbotron">
-        <h1 class="display-4 text-center font-weight-bold">COVID-19 Hospital Utilization Dashboard</h1>
-        <h2 class="display-5 text-center font-weight-bold">Central AZ Region (Source: AZDHS-EMResource)</h2>
-        <p id='currentDay' class="lead display-6"></p>
-        
+       <h1 class="display-4 text-center font-weight-bold">COVID-19 Hospital Utilization Dashboard</h1>
+       <h2 class="display-5 text-center font-weight-bold">Central AZ Region (Source: AZDHS-EMResource)</h2>
+       <p id="currentDay" class="lead display-6"></p>
     </header>
-
     <article>
-        <p id="lastDataDate" class="lastDate lead text-center"></p>
-        <div class="container" role='main'>
-            
-            <div class="row">
-                
-
-                <div class="col-sm-4 text-center">
-                    
-                    <div class="panel panel-default">
-                        <h3 class="panel-title">Emergency Department</h3>
-                    </div>
-                    <div class="panel-content text-center dsNumber">
-                        <p id="covidEDNumber"></p>
-                        <p id="EDPosPts">
-                            <EDPosPts />
-                        </p>
-                    </div>
-                    <div class="panel-footer">
-                        <h4>COVID Positive Patients Seen in ED</h4>
-                        <p class="threshold text-left">Max threshold: <span id='edMaxThreshold'class="threshold"></span></p>
-                        <p class="threshold text-left">Min threshold: <span id='edMinThreshold'class="threshold"></span></p>
-                    </div>
+       <p id="lastDataDate" class="lastDate lead text-center"></p>
+       <div class="container" role="main">
+          <div class="row">
+             <div class="col-sm-4 text-center">
+                <div class="panel panel-default">
+                   <h3 class="panel-title">COVID Positive Patients Seen in ED</h3>
                 </div>
-
-                <div class="col-sm-4 text-center">
-                    <div class="panel panel-default">
-                        <h3 class="panel-title">Admissions</h3>
-                    </div>
-                    <div class="panel-content text-center dsNumber">
-                        <p id="covidAdmitNumber"></p>
-                        <p id="COVIDpositiveAdmits">
-                            <COVIDpositiveAdmits />
-                        </p>
-                    </div>
-                    <div class="panel-footer">
-                        <h4>COVID Positive Admissions</h4>
-                        <p class="threshold text-left">Max threshold: <span id='admitsMaxThreshold'class="threshold"></span></p>
-                        <p class="threshold text-left">Min threshold: <span id='admitsMinThreshold'class="threshold"></span></p>
-                    </div>
+                <div class="panel-content text-center dsNumber">
+                   <p id="covidEDNumber"></p>
+                   <p id="EDPosPts">
+                      <EDPosPts/>
+                   </p>
                 </div>
-
-                <div class="col-sm-4 text-center">
-                    <div class="panel panel-default">
-                        <h3 class="panel-title">Inpatients</h3>
-                    </div>
-                    <div class="panel-content text-center dsNumber">
-                        <p id="covidInptNumber"></p>
-                        <p id="COVIDpositiveInpatients">
-                            <COVIDpositiveInpatients />
-                        </p>
-                    </div>
-                    <div class="panel-footer">
-                        <h4>COVID Positive Inpatients</h4>
-                        <p class="threshold text-left">Max threshold: <span id='inptMaxThreshold'class="threshold"></span></p>
-                        <p class="threshold text-left">Min threshold: <span id='inptMinThreshold'class="threshold"></span></p>
-                    </div>
+                <div class="panel-footer">
+                   
+              
                 </div>
-                <!-- <div class="col-sm-12 text-center">color of numbers is determined by set thresholds.</div>
-            </br> -->
-                <div class="col-sm-4 text-center">
-                    <div class="panel panel-default">
-                        <h3 class="panel-title">Medical Surgical Beds</h3>
-                    </div>
-                    <div class="panel-content text-center">
-                        <p id="MedSurgNumAvail">
-                            <MedSurgNumAvail />
-                        </p>
-                        <p id="MedSurgInUseCovid">
-                            <MedSurgInUseCovid />
-                        </p>
-                        <p id="MedSurgInUseOther">
-                            <MedSurgInUseOther />
-                        </p>
-
-                        <canvas id="medSurgBeds" class="chart"></canvas>
-                    </div>
-                    <div class="panel-footer">
-                       <p class="capacity text-left">Med/Surg Bed Capacity: <span id="msCapacity"class="capacity"></span></p>
-                    </div>
+             </div>
+             <div class="col-sm-4 text-center">
+                <div class="panel panel-default">
+                   <h3 class="panel-title">COVID Positive Admissions</h3>
                 </div>
-
-                <div class="col-sm-4 text-center">
-                    <div class="panel panel-default">
-                        <h3 class="panel-title">ICU Beds</h3>
-                    </div>
-                    <div class="panel-content text-center">
-                        <p id="ICUAdultAvail">
-                            <ICUAdultAvail />
-                        </p>
-                        <p id="ICUAdultInUsePositive">
-                            <ICUAdultInUsePositive />
-                        </p>
-                        <p id="ICUAdultInUseOther">
-                            <ICUAdultInUseOther />
-                        </p>
-
-                        <canvas id="IcuBeds" class="chart"></canvas>
-                    </div>
-                    <div class="panel-footer">
-                        <p class="capacity text-left">ICU Bed Capacity:  <span id="icuCapacity"class="capacity"></span></p>
-                    </div>
+                <div class="panel-content text-center dsNumber">
+                   <p id="covidAdmitNumber"></p>
+                   <p id="COVIDpositiveAdmits">
+                      <COVIDpositiveAdmits/>
+                   </p>
                 </div>
-
-                <div class="col-sm-4 text-center">
-                    <div class="panel panel-default">
-                        <h3 class="panel-title"> Ventilators</h3>
-                    </div>
-                    <div class="panel-content text-center">
-                        <p id="VentsAvail">
-                            <VentsAvail />
-                        </p>
-                        <p id="ventInUsePos">
-                            <ventInUsePos />
-                        </p>
-                        <p id="ventInUseOther">
-                            <ventInUseOther />
-                        </p>
-                        <canvas id="vents" class="chart"></canvas>
-                    </div>
-                    <div class="panel-footer">
-                        <p class="capacity text-left">Vent Bed Capacity: <span id="ventCapacity" class="capacity"></span></p>
-                    </div>
+                <div class="panel-footer">
+                 
+             
                 </div>
-            </div>
-           
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 text-center">
-
-                    <div class="panel panel-default">
-                        <h3 class="panel-title">COVID + Line Chart</h3>
-                    </div>
-                    <div class="panel-content text-center">
-
-                        <canvas id="covidLine" class="chart"></canvas>
-                    </div>
-                    <div class="panel-footer">
-                        <h4>COVID Positive Patients Line Chart</h4>
-                        <p class="threshold text-left">Line graph data is shown filtered from date: <span class="threshold" id='lineDateFilter'></span></p>
-                        
-                    </div>
+             </div>
+             <div class="col-sm-4 text-center">
+                <div class="panel panel-default">
+                   <h3 class="panel-title">COVID Positive Inpatients</h3>
                 </div>
-
-            </div>
-        </div>
-
+                <div class="panel-content text-center dsNumber">
+                   <p id="covidInptNumber"></p>
+                   <p id="COVIDpositiveInpatients">
+                      <COVIDpositiveInpatients/>
+                   </p>
+                </div>
+                <div class="panel-footer">
+                   <h4></h4>
+               
+                </div>
+             </div>
+             <div class="container">
+                <div class="row">
+                   <div class="col-sm-12 text-center">
+                      <div class="panel panel-default">
+                         <h3 class="panel-title">COVID + Line Chart</h3>
+                      </div>
+                      <div class="panel-content text-center">
+                         <canvas id="covidLine" class="chart"></canvas>
+                      </div>
+                      <div class="panel-footer">
+                         <h4>COVID Positive Patients Line Chart</h4><br/>
+                         <p class="threshold text-left">Line graph data is shown filtered from date: <span class="threshold" id="lineDateFilter"></span>
+                         </p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+             <div class="col-sm-4 text-center">
+                <div class="panel panel-default">
+                   <h3 class="panel-title">Medical Surgical Beds</h3>
+                </div>
+                <div class="panel-content text-center">
+                   <p id="MedSurgNumAvail">
+                      <MedSurgNumAvail/>
+                   </p>
+                   <p id="MedSurgInUseCovid">
+                      <MedSurgInUseCovid/>
+                   </p>
+                   <p id="MedSurgInUseOther">
+                      <MedSurgInUseOther/>
+                   </p>
+                   <canvas id="medSurgBeds" class="chart"></canvas>
+                </div>
+                <div class="panel-footer">
+                   <p class="capacity">Med/Surg Bed Capacity: <span id="msCapacity" class="capacityNumber"></span>
+                   </p>
+                   <p class="notes">excludes planned surge capacity</p>
+                </div>
+             </div>
+             <div class="col-sm-4 text-center">
+                <div class="panel panel-default">
+                   <h3 class="panel-title">ICU Beds</h3>
+                </div>
+                <div class="panel-content text-center">
+                   <p id="ICUAdultAvail">
+                      <ICUAdultAvail/>
+                   </p>
+                   <p id="ICUAdultInUsePositive">
+                      <ICUAdultInUsePositive/>
+                   </p>
+                   <p id="ICUAdultInUseOther">
+                      <ICUAdultInUseOther/>
+                   </p>
+                   <canvas id="IcuBeds" class="chart"></canvas>
+                </div>
+                <div class="panel-footer">
+                   <p class="capacity">ICU Bed Capacity:  <span id="icuCapacity" class="capacityNumber"></span>
+                   </p>
+                   <p class="notes">excludes planned surge capacity</p>
+                </div>
+             </div>
+             <div class="col-sm-4 text-center">
+                <div class="panel panel-default">
+                   <h3 class="panel-title"> Ventilators</h3>
+                </div>
+                <div class="panel-content text-center">
+                   <p id="VentsAvail">
+                      <VentsAvail/>
+                   </p>
+                   <p id="ventInUsePos">
+                      <ventInUsePos/>
+                   </p>
+                   <p id="ventInUseOther">
+                      <ventInUseOther/>
+                   </p>
+                   <canvas id="vents" class="chart"></canvas>
+                </div>
+                <div class="panel-footer">
+                   <p class="capacity">Vent Bed Capacity: <span id="ventCapacity" class="capacityNumber"></span>
+                   </p>
+                   <p class="notes">excludes planned surge capacity</p>
+                </div>
+             </div>
+          </div>
+       </div>
     </article>
   
    
