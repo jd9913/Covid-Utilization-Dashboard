@@ -26,3 +26,6 @@ thresholds.json
 data/hospital.json
 data/thresholds.json
 .vs/Dashboard_Hospital/v16/.suo
+data/hospital.json
+data/hospital.json
+*.json
