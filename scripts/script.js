@@ -9,9 +9,6 @@ const getData = () => {
 };
 
 
-
-
-
 let dataLineChartED = []; //array to hold daily data to generate line chart for ED patients 4/2020-current
 let dataLineChartAd = []; //array to hold daily data to generate line chart for Admit 4/2020-current
 let dataLineChartInp = []; //array to hold daily data to generate line chart for Inpatients 4/2020-current
@@ -66,7 +63,9 @@ getCurrentDay();
 
 getData();
 
-        
+  
+    
+       
         
 
 function populateAllVariables(allData1) {
@@ -78,7 +77,7 @@ function populateAllVariables(allData1) {
     })
 
    
-  
+  //  console.log(validDates)
 
 
     let allData = validDates.sort(function (a, b) {
@@ -132,165 +131,166 @@ function populateAllVariables(allData1) {
 
     };
     
+
     popLastDate();
 
     //filter and reduce the arrays to pull the latest bed capacity numbers to match the date on the pie charts
 
-    let msCapacityAll = allData.map((data) => {
-        return [(data.medSurg_Capacity), (new Date(data.DataDate))];
-    })
+//     let msCapacityAll = allData.map((data) => {
+//         return [(data.medSurg_Capacity), (new Date(data.DataDate))];
+//     })
    
-    
+//    // console.log(allData)
 
-    function msCapacityNum() {
-        let max1 = msCapacityAll.reduce((a, b) => {
+//     function msCapacityNum() {
+//         let max1 = msCapacityAll.reduce((a, b) => {
 
-            return a[1] > b[1] ? a : b;
-        });
+//             return a[1] > b[1] ? a : b;
+//         });
 
-        return [max1[0]];
-    }
-let msCapacity=msCapacityNum();
+//         return [max1[0]];
+//     }
+// let msCapacity=msCapacityNum();
 
-    $('#msCapacity').text(msCapacity);
+//     $('#msCapacity').text(msCapacity);
 
-    let icuCapacityAll = allData.map((data) => {
-        return [(data.icuAdult_Capacity), (new Date(data.DataDate))];
-    })
-    function icuCapacityNum(){
-        let max1=icuCapacityAll.reduce((a, b)=>{
-            return a[1]>b[1]?a:b;
-        });
-        return[max1[0]]
-    }
+//     let icuCapacityAll = allData.map((data) => {
+//         return [(data.icuAdult_Capacity), (new Date(data.DataDate))];
+//     })
+//     function icuCapacityNum(){
+//         let max1=icuCapacityAll.reduce((a, b)=> {
+//             return a[1]>b[1]?a:b;
+//         });
+//         return[max1[0]]
+//     }
 
-    let icuCapacity=icuCapacityNum();
+//     let icuCapacity=icuCapacityNum();
 
-    $('#icuCapacity').text(icuCapacity);
+//     $('#icuCapacity').text(icuCapacity);
 
-    let ventCapacityAll = allData.map((data) => {
-        return [(data.vent_Capacity), (new Date(data.DataDate))];
-    })
+//     let ventCapacityAll = allData.map((data) => {
+//         return [(data.vent_Capacity), (new Date(data.DataDate))];
+//     })
 
-    function ventCapacityNum(){
-        let max1=ventCapacityAll.reduce((a, b)=>{
-            return a[1]>b[1]?a:b;
-        });
-        return [max1[0]];
-    }
-let ventCapacity=ventCapacityNum();
+//     function ventCapacityNum(){
+//         let max1=ventCapacityAll.reduce((a, b)=>{
+//             return a[1]>b[1]?a:b;
+//         });
+//         return [max1[0]];
+//     }
+// let ventCapacity=ventCapacityNum();
 
-    $('#ventCapacity').text(ventCapacity);
-
-
-    //filtering for medsurge data to populate pie charts
-    let medsurgDataAvail = allData.map((data) => {
-
-        return [(data.medSurgBed_Avail), (new Date(data.DataDate))];
-    });
+//     $('#ventCapacity').text(ventCapacity);
 
 
+    // //filtering for medsurge data to populate pie charts
+    // let medsurgDataAvail = allData.map((data) => {
 
-    function medsurgPieAvail() {
-        let max1 = medsurgDataAvail.reduce((a, b) => {
+    //     return [(data.medSurgBed_Avail), (new Date(data.DataDate))];
+    // });
 
 
 
-            return a[1] > b[1] ? a : b;
-        });
+    // function medsurgPieAvail() {
+    //     let max1 = medsurgDataAvail.reduce((a, b) => {
 
 
-        return [max1[0]];
-    }
 
-    let medsurgDataPos = allData.map((data) => {
-        return [(data.medSurg_InUseCovid), (new Date(data.DataDate))];
-    });
-
-    function medsurgPiePos() {
-        let max1 = medsurgDataPos.reduce((a, b) => { return a[1] > b[1] ? a : b; });
-
-        return [max1[0]];
-    }
-
-    let medsurgDataOther = allData.map((data) => {
-        return [(data.MedSurg_InUseOther), (new Date(data.DataDate))];
-    });
+    //         return a[1] > b[1] ? a : b;
+    //     });
 
 
-    function medsurgPieOther() {
-        let max1 = medsurgDataOther.reduce((a, b) => { return a[1] > b[1] ? a : b; });
+    //     return [max1[0]];
+    // }
 
-        return [max1[0]];
-    }
+    // let medsurgDataPos = allData.map((data) => {
+    //     return [(data.medSurg_InUseCovid), (new Date(data.DataDate))];
+    // });
 
+    // function medsurgPiePos() {
+    //     let max1 = medsurgDataPos.reduce((a, b) => { return a[1] > b[1] ? a : b; });
 
-    let icuDataAvail = allData.map((data) => {
-        return [(data.icuAdult_Avail), (new Date(data.DataDate))];
-    });
+    //     return [max1[0]];
+    // }
 
-
-    function icuPieAvail() {
-        let max1 = icuDataAvail.reduce((a, b) => { return a[1] > b[1] ? a : b; });
-
-        return [max1[0]];
-    }
-
-    let icuDataPos = allData.map((data) => {
-        return [(data.icuAdult_InUseCovid), (new Date(data.DataDate))];
-    });
+    // let medsurgDataOther = allData.map((data) => {
+    //     return [(data.MedSurg_InUseOther), (new Date(data.DataDate))];
+    // });
 
 
-    function icuPiePos() {
-        let max1 = icuDataPos.reduce((a, b) => { return a[1] > b[1] ? a : b; });
+    // function medsurgPieOther() {
+    //     let max1 = medsurgDataOther.reduce((a, b) => { return a[1] > b[1] ? a : b; });
 
-        return [max1[0]];
-    }
-
-
-    let icuDataOther = allData.map((data) => {
-        return [(data.icuAdult_InUseOther), (new Date(data.DataDate))];
-    });
+    //     return [max1[0]];
+    // }
 
 
-    function icuPieOther() {
-        let max1 = icuDataOther.reduce((a, b) => { return a[1] > b[1] ? a : b; });
-
-        return [max1[0]];
-    }
-
-    let ventDataAvail = allData.map((data) => {
-        return [(data.vent_Avail), (new Date(data.DataDate))];
-    });
-
-    function ventPieAvail() {
-        let max1 = ventDataAvail.reduce((a, b) => { return a[1] > b[1] ? a : b; });
-
-        return [max1[0]];
-    }
+    // let icuDataAvail = allData.map((data) => {
+    //     return [(data.icuAdult_Avail), (new Date(data.DataDate))];
+    // });
 
 
-    let ventDataPos = allData.map((data) => {
-        return [(data.vent_InUseCovid), (new Date(data.DataDate))];
-    });
+    // function icuPieAvail() {
+    //     let max1 = icuDataAvail.reduce((a, b) => { return a[1] > b[1] ? a : b; });
+
+    //     return [max1[0]];
+    // }
+
+    // let icuDataPos = allData.map((data) => {
+    //     return [(data.icuAdult_InUseCovid), (new Date(data.DataDate))];
+    // });
 
 
-    function ventPiePos() {
-        let max1 = ventDataPos.reduce((a, b) => { return a[1] > b[1] ? a : b; });
+    // function icuPiePos() {
+    //     let max1 = icuDataPos.reduce((a, b) => { return a[1] > b[1] ? a : b; });
 
-        return [max1[0]];
-    }
-
-    let ventDataOther = allData.map((data) => {
-        return [(data.vent_InUseOther), (new Date(data.DataDate))];
-    });
+    //     return [max1[0]];
+    // }
 
 
-    function ventPieOther() {
-        let max1 = ventDataOther.reduce((a, b) => { return a[1] > b[1] ? a : b; });
+    // let icuDataOther = allData.map((data) => {
+    //     return [(data.icuAdult_InUseOther), (new Date(data.DataDate))];
+    // });
 
-        return [max1[0]];
-    }
+
+    // function icuPieOther() {
+    //     let max1 = icuDataOther.reduce((a, b) => { return a[1] > b[1] ? a : b; });
+
+    //     return [max1[0]];
+    // }
+
+    // let ventDataAvail = allData.map((data) => {
+    //     return [(data.vent_Avail), (new Date(data.DataDate))];
+    // });
+
+    // function ventPieAvail() {
+    //     let max1 = ventDataAvail.reduce((a, b) => { return a[1] > b[1] ? a : b; });
+
+    //     return [max1[0]];
+    // }
+
+
+    // let ventDataPos = allData.map((data) => {
+    //     return [(data.vent_InUseCovid), (new Date(data.DataDate))];
+    // });
+
+
+    // function ventPiePos() {
+    //     let max1 = ventDataPos.reduce((a, b) => { return a[1] > b[1] ? a : b; });
+
+    //     return [max1[0]];
+    // }
+
+    // let ventDataOther = allData.map((data) => {
+    //     return [(data.vent_InUseOther), (new Date(data.DataDate))];
+    // });
+
+
+    // function ventPieOther() {
+    //     let max1 = ventDataOther.reduce((a, b) => { return a[1] > b[1] ? a : b; });
+
+    //     return [max1[0]];
+    // }
 
 
     //function to change date from UTC to common date
@@ -358,9 +358,9 @@ let ventCapacity=ventCapacityNum();
     let dataAdNumber = adMax();// number of daily + patients admitted
     let dataInptNumber = inptMax(); //number of daily + patients as inpatients
 
-    let dataMSPie = [medsurgPieAvail(), medsurgPiePos(), medsurgPieOther()];   //array to hold daily data to generate pie chart for medical surgical beds
-    let dataIcuPie = [icuPieAvail(), icuPiePos(), icuPieOther()];  //array to hold daily data to generate pie chart for ICU beds
-    let dataVentPie = [ventPieAvail(), ventPiePos(), ventPieOther()];  //array to hold daily data to generate pie chart for ventilated patients
+    // let dataMSPie = [medsurgPieAvail(), medsurgPiePos(), medsurgPieOther()];   //array to hold daily data to generate pie chart for medical surgical beds
+    // let dataIcuPie = [icuPieAvail(), icuPiePos(), icuPieOther()];  //array to hold daily data to generate pie chart for ICU beds
+    // let dataVentPie = [ventPieAvail(), ventPiePos(), ventPieOther()];  //array to hold daily data to generate pie chart for ventilated patients
 
 
 
@@ -396,9 +396,9 @@ let ventCapacity=ventCapacityNum();
 
 
     //4 graph data references
-    var MSctx = medSurgGraphEl;
-    var ICUctx = icuGraphEl;
-    var Ventctx = ventGraphEl;
+    // var MSctx = medSurgGraphEl;
+    // var ICUctx = icuGraphEl;
+    // var Ventctx = ventGraphEl;
     var Linectx = covidLineEl;
 
 
@@ -489,54 +489,54 @@ let ventCapacity=ventCapacityNum();
     // med surg graph
 
 
-    var medSurgGraph = new Chart(MSctx, {
-        type: "pie",
-        data: {
-            labels: pieChartLabels,
-            datasets: [{
-                label: "Medical Surgical Bed Capacity Daily Snapshot",
-                data: dataMSPie,
-                backgroundColor: [color1, color2, color3],
+    // var medSurgGraph = new Chart(MSctx, {
+    //     type: "pie",
+    //     data: {
+    //         labels: pieChartLabels,
+    //         datasets: [{
+    //             label: "Medical Surgical Bed Capacity Daily Snapshot",
+    //             data: dataMSPie,
+    //             backgroundColor: [color1, color2, color3],
 
-            }]
+    //         }]
 
-        },
-        options: options
-    });
-
-
-    var ICUGraph = new Chart(ICUctx, {
-
-        // ICU bed graph
-
-        type: "pie",
-        data: {
-            labels: pieChartLabels,
-            datasets: [{
-                label: "ICU Bed Capacity Daily Snapshot",
-                data: dataIcuPie,
-                backgroundColor: [color1, color2, color3],
+    //     },
+    //     options: options
+    // });
 
 
-            }]
-        },
-        options: options
-    });
+    // var ICUGraph = new Chart(ICUctx, {
 
-    // ventilated patients graph
-    var ventGraph = new Chart(Ventctx, {
-        type: "pie",
-        data: {
-            labels: pieChartLabels,
-            datasets: [{
-                label: "Ventilated Capacity Daily Snapshot",
-                backgroundColor: [color1, color2, color3],
-                data: dataVentPie,
+    //     // ICU bed graph
 
-            }]
-        },
-        options: options
-    });
+    //     type: "pie",
+    //     data: {
+    //         labels: pieChartLabels,
+    //         datasets: [{
+    //             label: "ICU Bed Capacity Daily Snapshot",
+    //             data: dataIcuPie,
+    //             backgroundColor: [color1, color2, color3],
+
+
+    //         }]
+    //     },
+    //     options: options
+    // });
+
+    // // ventilated patients graph
+    // var ventGraph = new Chart(Ventctx, {
+    //     type: "pie",
+    //     data: {
+    //         labels: pieChartLabels,
+    //         datasets: [{
+    //             label: "Ventilated Capacity Daily Snapshot",
+    //             backgroundColor: [color1, color2, color3],
+    //             data: dataVentPie,
+
+    //         }]
+    //     },
+    //     options: options
+    // });
 
 
 

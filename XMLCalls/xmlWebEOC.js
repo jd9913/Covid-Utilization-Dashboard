@@ -3,7 +3,6 @@ const baseURL = "https://webeoc.maricopa.gov/eoc7/api/rest.svc";
 const boardURL = "/board/Hospital_Capacity/display/dashboardData";
 
 getData();
-
            
         
         function getData() {
@@ -24,23 +23,29 @@ getData();
     }
 
     data.send();
-    
 };
 
+//XML call for the thresholds data.  Tested and working in WebEOC
+            
+function getThresholds(){     
 
-
-// example code:
-
-// datalabels: {
-//     formatter: (value, ctx) => {
-//         let datasets = ctx.chart.data.datasets;
-//         if (datasets.indexOf(ctx.dataset) === datasets.length - 1) {
-//             let sum = datasets[0].data.reduce((a, b) => a + b, 0);
-//             let percentage = Math.round((value / sum) * 100) + '%';
-//             console.log(percentage);
-//             return percentage;
-//         } else {
-//             return percentage;
-//         }
-//     }
-// }
+const boardURL2 = "/board/HCCapacity/display/thresholds";
+              
+          function getData() {
+       
+            var data = new XMLHttpRequest();
+            data.open('GET', baseURL + boardURL2, false);
+        
+            data.onload = function () {
+        
+                if (this.status == 200) {
+        
+                    let thresholdData = JSON.parse(this.responseText);
+        
+                    console.log(thresholdData);
+                }
+            }
+        
+            data.send();
+        };
+    }
