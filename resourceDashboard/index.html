@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+    <html lang="en">   <head>
+        <meta charset="utf-8"/>
+        <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+        <title>Hospital Resources Dashboard</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+
+    <link rel="stylesheet" href="./style.css" />
+        
+     </head>
+     <body>
+        <header class="jumbotron">
+          <h1 class="display-4 text-center font-weight-bold">COVID-19 Hospital Resource Allocation Dashboard</h1>
+          <h2 class="display-5 text-center font-weight-bold">Central AZ Region (Source: AZDHS-EMResource)</h2>
+          <p id='currentDay' class="lead display-6"></p>
+          
+      </header>
+  
+      <article>
+          <p id="lastDataDate" class="lastDate lead text-center"></p>
+          <div class="container" role='main'>
+              
+              <div class="row">
+            
+                  <div class="col-sm-4 text-center">
+                      
+                      <div class="panel panel-default">
+                          <h3 class="panel-title">Med Surg beds in use</h3>
+                      </div>
+                      <div class="panel-content text-center dsNumber">
+                          <p id="covidMSNumber"></p>
+                          <!-- <p id="EDPosPts">
+                              <EDPosPts />
+                          </p> -->
+                      </div>
+                      <div class="panel-footer">
+                          <h4>Med Surg Beds in use for Covid +</h4>
+                          <!-- <p class="threshold text-left">Max threshold: <span id='edMaxThreshold'class="threshold"></span></p>
+                          <p class="threshold text-left">Min threshold: <span id='edMinThreshold'class="threshold"></span></p> -->
+                      </div>
+                  </div>
+  
+                  <div class="col-sm-4 text-center">
+                      <div class="panel panel-default">
+                          <h3 class="panel-title">Ventilators in use</h3>
+                      </div>
+                      <div class="panel-content text-center dsNumber">
+                          <p id="covidVentNumber"></p>
+                          <!-- <p id="COVIDpositiveAdmits">
+                              <COVIDpositiveAdmits />
+                          </p> -->
+                      </div>
+                      <div class="panel-footer">
+                          <h4>Ventilators in use for Covid +</h4>
+                          <!-- <p class="threshold text-left">Max threshold: <span id='admitsMaxThreshold'class="threshold"></span></p>
+                          <p class="threshold text-left">Min threshold: <span id='admitsMinThreshold'class="threshold"></span></p> -->
+                      </div>
+                  </div>
+  
+                  <div class="col-sm-4 text-center">
+                      <div class="panel panel-default">
+                          <h3 class="panel-title">ICU Beds in use</h3>
+                      </div>
+                      <div class="panel-content text-center dsNumber">
+                          <p id="covidIcuNumber"></p>
+                          
+                      </div>
+                      <div class="panel-footer">
+                          <h4>ICU beds in use for Covid +</h4>
+                      </div>
+                  </div>
+               
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-sm-12 text-center">
+          
+                              <div class="panel panel-default">
+                                  <h3 class="panel-title">COVID + Line Chart</h3>
+                              </div>
+                              <div class="panel-content text-center">
+          
+                                  <canvas id="covidLine" class="chart"></canvas>
+                              </div>
+                              <div class="panel-footer">
+                                  <h4>COVID Positive Patients Line Chart</h4>
+                                  <p class="threshold text-left">Line graph data is shown filtered from date: <span class="threshold" id='lineDateFilter'></span></p>
+                                  
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  
+                          <div class="col-sm-4 text-center">
+                      <div class="panel panel-default">
+                          <h3 class="panel-title">Medical Surgical Beds</h3>
+                      </div>
+                      <div class="panel-content text-center">
+                          <p id="MedSurgNumAvail">
+                              <MedSurgNumAvail />
+                          </p>
+                          <p id="MedSurgInUseCovid">
+                              <MedSurgInUseCovid />
+                          </p>
+                          <p id="MedSurgInUseOther">
+                              <MedSurgInUseOther />
+                          </p>
+  
+                          <canvas id="medSurgBeds" class="chart"></canvas>
+                      </div>
+                      <div class="panel-footer">
+                         <p class="capacity">Med/Surg Bed Capacity: <span id="msCapacity"></span></p>
+                         <p class="notes">excludes planned surge capacity</p>
+                      </div>
+                  </div>
+  
+                  <div class="col-sm-4 text-center">
+                      <div class="panel panel-default">
+                          <h3 class="panel-title">ICU Beds</h3>
+                      </div>
+                      <div class="panel-content text-center">
+                          <p id="ICUAdultAvail">
+                              <ICUAdultAvail />
+                          </p>
+                          <p id="ICUAdultInUsePositive">
+                              <ICUAdultInUsePositive />
+                          </p>
+                          <p id="ICUAdultInUseOther">
+                              <ICUAdultInUseOther />
+                          </p>
+  
+                          <canvas id="IcuBeds" class="chart"></canvas>
+                      </div>
+                      <div class="panel-footer">
+                          <p class="capacity text-left">ICU Bed Capacity:  <span id="icuCapacity"></span></p>
+                          <p class="notes">excludes planned surge capacity</p>
+                      </div>
+                  </div>
+  
+                  <div class="col-sm-4 text-center">
+                      <div class="panel panel-default">
+                          <h3 class="panel-title"> Ventilators</h3>
+                      </div>
+                      <div class="panel-content text-center">
+                          <p id="VentsAvail">
+                              <VentsAvail />
+                          </p>
+                          <p id="ventInUsePos">
+                              <ventInUsePos />
+                          </p>
+                          <p id="ventInUseOther">
+                              <ventInUseOther />
+                          </p>
+                          <canvas id="vents" class="chart"></canvas>
+                      </div>
+                      <div class="panel-footer">
+                          <p class="capacity text-left">Vent Bed Capacity: <span id="ventCapacity"></span></p>
+                          <p class="notes">excludes planned surge capacity</p>
+                      </div>
+                  </div>
+              </div>
+             
+          </div>
+   
+      </article>
+    
+      </body>
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+          <script src="./script.js"></script>
+
+</html>

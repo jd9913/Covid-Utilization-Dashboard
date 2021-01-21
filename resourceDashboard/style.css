@@ -1,0 +1,116 @@
+:root{
+    --color1:#ff6e54; /*ED color */
+   --color2:#444e86; /*inpatients */
+   --color3:#dd5182; /*Admit color */
+   --color4: #955196; /*extra--not used */
+   --fontColor:#003f5c; /* font color */
+}
+
+
+*{
+   font-size: 62.5%;
+}
+
+body{
+   font-size: 10rem;
+}
+
+.lastDate{
+   font-style: italic;
+   font-weight: bold;
+   color: red;
+   font-size: .25em;
+}
+
+.jumbotron {
+   font-size: 5em;
+}
+
+
+#currentDay{
+   text-align: center;
+   font-weight: bold;
+}
+
+.threshold{
+   font-size: 1em;
+   font-style: italic;
+
+}
+
+.capacity{
+   font-size: .75em;
+   text-align: left;
+   
+}
+.notes{
+   font-size: .5em;
+   font-style: italic;
+   font-weight: lighter;
+}
+.capacityNumber{
+   font-size: 1em;
+
+}
+
+.chart {
+   vertical-align: middle;
+   width: 100%;
+   margin: 0 auto;
+   position: relative;
+   display: inline-block;
+   font-size: 3rem;
+}
+h3{
+    font-size:1.75rem;
+}
+
+.panel-content{
+    padding: .5em;
+}
+
+.canvas {
+   height: 100%;
+}
+
+.panel-footer{
+   font-size: 2rem;
+}
+
+.panel panel-default {
+   padding: 2em;
+   font-size: 20rem;
+}
+
+.col-sm-12 {
+   padding: 2em;
+   border: 1px solid black;
+}
+
+.col-sm-4{
+   padding: 1em;
+   border: 1px solid black;
+}
+
+
+
+#covidMSNumber{
+   color:var(--color1);
+   font-size: 5rem;
+   font-weight: bold;
+
+}
+#covidVentNumber{
+   color: var(--color3);
+   font-size: 5rem;
+   font-weight: bold;
+
+}
+
+#covidIcuNumber{
+
+   color: var(--color2);
+   font-size: 5rem;
+   font-weight: bold;
+
+}
