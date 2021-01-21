@@ -18,7 +18,7 @@ data_Aug18-Aug24/EMResource Bed Poll workbook.csv
 
 =======
 node_modules
-*.xlsx
+
 *.csv
 hospital.json
 thresholds.json
@@ -28,4 +28,4 @@ data/thresholds.json
 .vs/Dashboard_Hospital/v16/.suo
 data/hospital.json
 data/hospital.json
-*.json
+
