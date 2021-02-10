@@ -18,7 +18,9 @@ Description
 
 :memo: [Installation Instructions](install)
 ========
->Clone the repository, open index.html with a webserver.
+>Clone the repository
+>> Choose either the Bed Dashboard folder or the Resources dashboard Folder
+>> Open index.html with a webserver to view the data located within the data folder in a file named hospital.json
 
 :computer: [Usage Information](usage)
 ===
@@ -38,11 +40,11 @@ Description
 >GitHub Username: jd9913<br>
 >:link: Repository Link: https://github.com/jd9913/Covid-Utilization-Dashboard<br>
 
-[Licenses](#license)
+[Data](#data)
 ==
->This application is covered under the following license(s): <br>
->><br>
->>click [here](https://choosealicense.com/licenses/) to read about these licenses.
+>>All data depicted within these graphs are for demonstration purposes only.  
+This is randomized data and does not depict any real situations.
+
 
 Footer
 --
