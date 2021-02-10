@@ -20,12 +20,16 @@ data_Aug18-Aug24/EMResource Bed Poll workbook.csv
 node_modules
 
 *.csv
-hospital.json
+
 thresholds.json
 >>>>>>> initialFiles
 data/hospital.json
 data/thresholds.json
 .vs/Dashboard_Hospital/v16/.suo
-data/hospital.json
-data/hospital.json
 
+
+XMLCalls/
+examples.json
+testing.js
+archive/
+.vscode/
