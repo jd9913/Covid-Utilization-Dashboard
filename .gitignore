@@ -33,3 +33,5 @@ examples.json
 testing.js
 archive/
 .vscode/
+XMLCalls/xmlRequest.js
+XMLCalls/xmlWebEOC.js

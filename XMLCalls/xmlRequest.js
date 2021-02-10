@@ -13,6 +13,7 @@ function openWebEocSession(creds) {
         'incident': incident
     };
 
+    
 
 
     var data = new XMLHttpRequest();

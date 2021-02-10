@@ -4,6 +4,7 @@ const boardURL = "/board/Hospital_Capacity/display/dashboardData";
 
 getData();
            
+
         
         function getData() {
 
