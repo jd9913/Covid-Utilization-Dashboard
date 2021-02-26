@@ -1,5 +1,5 @@
 const getData = () => {
-	$.get("../data/hospital.json", (hospitalData) => {
+	$.getJSON("../data/hospital.json", (hospitalData) => {
 		let hospitalDataClean = Object.values(hospitalData);
 
 		populateAllVariables(hospitalDataClean);
