@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta content="text/html; charset=utf-8" http-equiv="content-type" />
+
+		<title>Hospital Capacity Dashboard</title>
+
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+
+		<link rel="stylesheet" href="./bedDashboard/styles.css" />
+	</head>
+
+	<body>
+		<header>
+			<div class="jumbotron">
+				<h1 class="display-4 text-center font-weight-bold">
+					COVID-19 Hospital Patient Utilization Dashboard
+				</h1>
+				<h2 class="display-5 text-center font-weight-bold">
+					RANDOMIZED DATA FOR EXAMPLE ONLY
+				</h2>
+				<p id="currentDay" class="lead display-6"></p>
+			</div>
+			<ul class="nav justify-content-end">
+				<li class="nav-item">
+					<a class="nav-link active" aria-current="true" href="/index.html"
+						>Patient Utilization Dashboard</a
+					>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="./resource_index.html"
+						>Resource Utilization</a
+					>
+				</li>
+			</ul>
+		</header>
+
+		<article>
+			<p id="lastDataDate" class="lastDate lead text-center"></p>
+			<div class="container" role="main">
+				<div class="row">
+					<div class="col-sm-4 text-center">
+						<div class="panel panel-default">
+							<h3 class="panel-title">Emergency Department</h3>
+						</div>
+						<div class="panel-content text-center dsNumber">
+							<p id="covidEDNumber"></p>
+							<p id="EDPosPts">
+								<EDPosPts />
+							</p>
+						</div>
+						<div class="panel-footer">
+							<h4>COVID Positive Patients Seen in ED</h4>
+							<!-- <p class="threshold text-left">Max threshold: <span id='edMaxThreshold'class="threshold"></span></p>
+                        <p class="threshold text-left">Min threshold: <span id='edMinThreshold'class="threshold"></span></p> -->
+						</div>
+					</div>
+
+					<div class="col-sm-4 text-center">
+						<div class="panel panel-default">
+							<h3 class="panel-title">Admissions</h3>
+						</div>
+						<div class="panel-content text-center dsNumber">
+							<p id="covidAdmitNumber"></p>
+							<p id="COVIDpositiveAdmits">
+								<COVIDpositiveAdmits />
+							</p>
+						</div>
+						<div class="panel-footer">
+							<h4>COVID Positive Admissions</h4>
+							<!-- <p class="threshold text-left">Max threshold: <span id='admitsMaxThreshold'class="threshold"></span></p>
+                        <p class="threshold text-left">Min threshold: <span id='admitsMinThreshold'class="threshold"></span></p> -->
+						</div>
+					</div>
+
+					<div class="col-sm-4 text-center">
+						<div class="panel panel-default">
+							<h3 class="panel-title">Inpatients</h3>
+						</div>
+						<div class="panel-content text-center dsNumber">
+							<p id="covidInptNumber"></p>
+							<p id="COVIDpositiveInpatients">
+								<COVIDpositiveInpatients />
+							</p>
+						</div>
+						<div class="panel-footer">
+							<h4>COVID Positive Inpatients</h4>
+						</div>
+					</div>
+
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-12 text-center">
+								<div class="panel panel-default">
+									<h3 class="panel-title">COVID + Line Chart</h3>
+								</div>
+								<div class="panel-content text-center">
+									<canvas id="covidLine" class="chart"></canvas>
+								</div>
+								<div class="panel-footer">
+									<h4>COVID Positive Patients Line Chart</h4>
+									<p class="threshold text-left">
+										Line graph data is shown filtered from date:
+										<span class="threshold" id="lineDateFilter"></span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</article>
+
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+		<script src="./bedDashboard/script.js"></script>
+	</body>
+</html>
