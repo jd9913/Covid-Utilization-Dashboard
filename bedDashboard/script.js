@@ -1,12 +1,9 @@
 const getData = () => {
-	$.get(
-		"https://github.com/jd9913/Covid-Utilization-Dashboard/tree/main/data",
-		(hospitalData) => {
-			let hospitalDataClean = Object.values(hospitalData);
+	$.get("../data/hospital.json", (hospitalData) => {
+		let hospitalDataClean = Object.values(hospitalData);
 
-			populateAllVariables(hospitalDataClean);
-		}
-	);
+		populateAllVariables(hospitalDataClean);
+	});
 };
 
 let dataLineChartED = []; //array to hold daily data to generate line chart for ED patients 4/2020-current
