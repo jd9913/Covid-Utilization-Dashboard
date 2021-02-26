@@ -1,5 +1,7 @@
+const site_url = "/Covid-Utilization-Dashboard";
+
 const getData = () => {
-	$.getJSON("/data/hospital.json", (hospitalData) => {
+	$.getJSON(site_url + "/data/hospital.json", (hospitalData) => {
 		let hospitalDataClean = Object.values(hospitalData);
 		console.log(hospitalData);
 		console.log(hospitalDataClean);
